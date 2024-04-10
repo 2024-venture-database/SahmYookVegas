@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.SYVegas.check_customerInfoAndLog.check_Log.ManagerMenuLogSqlMapper">
+
+    <resultMap id="managerMenuLogResultMap" type="com.SYVegas.check_customerInfoAndLog.check_Log.Log">
+        <id property="code" column="log_code"/>
+        <result property="date" column="log_date"/>
+        <result property="amount" column="log_amount"/>
+    </resultMap>
+
+    <select id="selectAllMangerMenuLog" resultMap="managerMenuLogResultMap">
+        select *
+        from log
+    </select>
+
+    <select id="searchCustomerMangerMenuLog" parameterType="hashmap" resultMap="managerMenuLogResultMap">
+        select *
+        from log
+        where log_code = #{Cname}
+    </select>
+
+    <select id="sumAllMangerMenuLog" resultMap="managerMenuLogResultMap">
+        select sum(amount)
+        from log
+    </select>
+</mapper>
