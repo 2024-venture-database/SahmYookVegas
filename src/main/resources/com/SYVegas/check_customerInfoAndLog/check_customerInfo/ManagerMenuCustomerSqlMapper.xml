@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.SYVegas.check_customerInfoAndLog.check_customerInfo.ManagerMenuCustomerSqlMapper">
+
+    <resultMap id="managerMenuCustomerResultMap" type="com.SYVegas.check_customerInfoAndLog.check_customerInfo.CustomerInfo">
+        <id property="code" column="customer_code"/>
+        <result property="name" column="customer_name"/>
+        <result property="id" column="customer_id"/>
+        <result property="password" column="customer_password"/>
+        <result property="phone" column="customer_phone"/>
+        <result property="birth" column="customer_birth"/>
+        <result property="address" column="customer_address"/>
+        <result property="balance" column="customer_balance"/>
+        <result property="credit" column="customer_credit"/>
+        <result property="rank" column="customer_rank"/>
+    </resultMap>
+
+    <select id="selectAllManagerMenuCustomerInfo" resultMap="managerMenuCustomerResultMap">
+        select customer_name
+        from customer
+    </select>
+</mapper>
