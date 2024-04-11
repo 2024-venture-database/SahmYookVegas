@@ -21,4 +21,16 @@
         select customer_name
         from customer
     </select>
+    <update id="updateManagerMenuCustomerInfo" parameterType="hashmap">
+        update customer
+        set customer_name=#{value}
+        where customer_id=#{id}
+    </update>
+    <delete id="deleteCustomerMangerMenuLog"  parameterType="hashmap" >
+        delete *
+        from customer
+        where customer_id=#{Cid}
+    </delete>
+
+
 </mapper>

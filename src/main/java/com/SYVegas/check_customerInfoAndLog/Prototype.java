@@ -42,9 +42,11 @@ public class Prototype {
             int num=sc.nextInt();
             switch (num) {
                 case 1:
-                    continue;
+                    managerMenuCustomer.updateManagerMenuCustomerInfo(ManagerMenuCustomer.inputSearchKey());
+                    break;
                 case 2:
-                    continue;
+                    managerMenuCustomer.deleteCustomerMangerMenuLog(ManagerMenuCustomer.managerSearchCustomer());
+                    break;
                 case 9:
                     return;
             }
@@ -68,6 +70,7 @@ public class Prototype {
                     break;
                 case 2:
                     managerMenuLog.sumAllMangerMenuLog();
+                    break;
                 case 9:
                     return;
             }
