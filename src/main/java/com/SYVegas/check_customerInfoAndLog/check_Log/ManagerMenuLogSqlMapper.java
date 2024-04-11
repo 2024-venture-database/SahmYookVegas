@@ -8,5 +8,5 @@ public interface ManagerMenuLogSqlMapper {
 
     List<Log> searchCustomerMangerMenuLog(String cname);
 
-    List<Log> sumAllMangerMenuLog();
+    int sumAllMangerMenuLog();
 }

@@ -9,6 +9,7 @@ public class Prototype {
     public void managerPrototypeStart() {
         Scanner sc = new Scanner(System.in);
         do {
+            System.out.println();
             System.out.println("======================관리자 메뉴======================");
             System.out.println("1. 모든 회원의 정보를 조회거나 수정,삭제 합니다.");
             System.out.println("2. 모든 로그를 확인합니다.");
@@ -33,6 +34,8 @@ public class Prototype {
         Scanner sc = new Scanner(System.in);
         ManagerMenuCustomer managerMenuCustomer = new ManagerMenuCustomer();
         do{
+            System.out.println();
+            System.out.println("======================이용자 정보======================");
             managerMenuCustomer.selectAllManagerMenuCustomerInfo();
             System.out.println("======================관리자 메뉴======================");
             System.out.println("1. 회원의 정보를 수정합니다.");
@@ -45,7 +48,7 @@ public class Prototype {
                     managerMenuCustomer.updateManagerMenuCustomerInfo(ManagerMenuCustomer.inputSearchKey());
                     break;
                 case 2:
-                    managerMenuCustomer.deleteCustomerMangerMenuLog(ManagerMenuCustomer.managerSearchCustomer());
+                    managerMenuCustomer.deleteMangerMenuCustomerInfo(ManagerMenuCustomer.managerSearchCustomer());
                     break;
                 case 9:
                     return;
@@ -57,6 +60,8 @@ public class Prototype {
         Scanner sc = new Scanner(System.in);
         ManagerMenuLog managerMenuLog = new ManagerMenuLog();
         do{
+            System.out.println();
+            System.out.println("========================로그목록=======================");
             managerMenuLog.selectAllMangerMenuLog();
             System.out.println("======================관리자 메뉴======================");
             System.out.println("1. 회원의 이름으로 필터링합니다.");
@@ -69,7 +74,7 @@ public class Prototype {
                     managerMenuLog.searchCustomerMangerMenuLog(ManagerMenuLog.managerSearchCustomer());
                     break;
                 case 2:
-                    managerMenuLog.sumAllMangerMenuLog();
+                    managerMenuLog.sumAllMangerMenuLogAndPrint();
                     break;
                 case 9:
                     return;

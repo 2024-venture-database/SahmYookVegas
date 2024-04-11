@@ -18,18 +18,28 @@
     </resultMap>
 
     <select id="selectAllManagerMenuCustomerInfo" resultMap="managerMenuCustomerResultMap">
-        select customer_name
+        select *
         from customer
     </select>
     <update id="updateManagerMenuCustomerInfo" parameterType="hashmap">
         update customer
-        set customer_name=#{value}
+        <set>
+            <if test="attribute== 1">
+                customer_password=#{value}
+            </if>
+            <if test="attribute== 2">
+                customer_name=#{value}
+            </if>
+            <if test="attribute== 3">
+                customer_phone=#{value}
+            </if>
+        </set>
         where customer_id=#{id}
     </update>
-    <delete id="deleteCustomerMangerMenuLog"  parameterType="hashmap" >
-        delete *
+    <delete id="deleteMangerMenuCustomerInfo"  parameterType="hashmap" >
+        delete
         from customer
-        where customer_id=#{Cid}
+        where customer_id=#{id}
     </delete>
 
 

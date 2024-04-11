@@ -21,8 +21,8 @@
         where log_code = #{Cname}
     </select>
 
-    <select id="sumAllMangerMenuLog" resultMap="managerMenuLogResultMap">
-        select sum(amount)
+    <select id="sumAllMangerMenuLog" resultType="java.lang.Integer" >
+        SELECT SUM(log_amount) AS sum_result
         from log
     </select>
 </mapper>
