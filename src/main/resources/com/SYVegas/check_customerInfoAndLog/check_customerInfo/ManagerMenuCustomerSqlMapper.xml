@@ -5,21 +5,20 @@
 <mapper namespace="com.SYVegas.check_customerInfoAndLog.check_customerInfo.ManagerMenuCustomerSqlMapper">
 
     <resultMap id="managerMenuCustomerResultMap" type="com.SYVegas.check_customerInfoAndLog.check_customerInfo.CustomerInfo">
-        <id property="code" column="customer_code"/>
+        <id property="id" column="customer_id"/>
         <result property="name" column="customer_name"/>
-        <result property="id" column="customer_id"/>
         <result property="password" column="customer_password"/>
         <result property="phone" column="customer_phone"/>
-        <result property="birth" column="customer_birth"/>
-        <result property="address" column="customer_address"/>
         <result property="balance" column="customer_balance"/>
         <result property="credit" column="customer_credit"/>
-        <result property="rank" column="customer_rank"/>
+        <result property="rank" column="vegas_rank_name"/>
     </resultMap>
 
     <select id="selectAllManagerMenuCustomerInfo" resultMap="managerMenuCustomerResultMap">
         select *
         from customer
+        join vegas_rank
+        where customer.customer_rank =vegas_rank.vegas_rank_id
     </select>
     <update id="updateManagerMenuCustomerInfo" parameterType="hashmap">
         update customer
@@ -41,6 +40,4 @@
         from customer
         where customer_id=#{id}
     </delete>
-
-
 </mapper>

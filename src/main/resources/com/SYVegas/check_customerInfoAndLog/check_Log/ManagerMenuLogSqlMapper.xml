@@ -6,8 +6,11 @@
 
     <resultMap id="managerMenuLogResultMap" type="com.SYVegas.check_customerInfoAndLog.check_Log.Log">
         <id property="code" column="log_code"/>
-        <result property="date" column="log_date"/>
-        <result property="amount" column="log_amount"/>
+        <result property="customer_id" column="log_customer_id"/>
+        <result property="date" column="=log_date"/>
+        <result property="activity" column="log_activiy"/>
+        <result property="money" column="log_money"/>
+        <result property="kind_money" column="log_kind_money"/>
     </resultMap>
 
     <select id="selectAllMangerMenuLog" resultMap="managerMenuLogResultMap">
@@ -18,11 +21,11 @@
     <select id="searchCustomerMangerMenuLog" parameterType="hashmap" resultMap="managerMenuLogResultMap">
         select *
         from log
-        where log_code = #{Cname}
+        where log_customer_id = #{Cname}
     </select>
 
     <select id="sumAllMangerMenuLog" resultType="java.lang.Integer" >
-        SELECT SUM(log_amount) AS sum_result
+        SELECT SUM(log_money) AS sum_result
         from log
     </select>
 </mapper>

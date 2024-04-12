@@ -45,9 +45,11 @@ public class Prototype {
             int num=sc.nextInt();
             switch (num) {
                 case 1:
+                    System.out.println("======================이용자 로그======================");
                     managerMenuCustomer.updateManagerMenuCustomerInfo(ManagerMenuCustomer.inputSearchKey());
                     break;
                 case 2:
+                    System.out.println("==================================================");
                     managerMenuCustomer.deleteMangerMenuCustomerInfo(ManagerMenuCustomer.managerSearchCustomer());
                     break;
                 case 9:
