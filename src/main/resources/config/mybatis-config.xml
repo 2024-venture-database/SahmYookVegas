@@ -17,6 +17,8 @@
         </environment>
     </environments>
     <mappers>
-        <package name ="com.SYVegas"/>
+        <mapper resource="com/SYVegas/customerMyInfo"/>
     </mappers>
+
+
 </configuration>
