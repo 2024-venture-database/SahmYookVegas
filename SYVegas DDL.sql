@@ -57,7 +57,7 @@ CREATE TABLE log
     log_activiy VARCHAR(255) NOT NULL, -- 금액 변동의 활동 종류 ex)충전, 상품 구매, 칩교환, 반환
     log_customer_id VARCHAR(255), -- 이용자 ID (fk)
     PRIMARY KEY (log_code),
-    FOREIGN KEY ( log_customer_id) REFERENCES customer(customer_id)
+    FOREIGN KEY ( log_customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
 
 
