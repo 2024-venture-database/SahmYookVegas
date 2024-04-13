@@ -4,6 +4,14 @@ import java.util.Scanner;
 
 public class Prototype {
     public static void main(String[] args) {
+
+        String url = "jdbc:mysql://localhost:3306/syvegas";
+        String user = "syvegas";
+        String password = "syvegas";
+
+        LogDAO logDAO = new LogDAO(url, user, password);
+        logDAO.displayLog();
+
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
 
@@ -55,5 +63,6 @@ public class Prototype {
         }
 
         scanner.close();
+
     }
 }
