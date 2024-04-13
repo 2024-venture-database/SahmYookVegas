@@ -51,7 +51,7 @@ public class Main {
         if (customer != null) {
             System.out.println("로그인 성공! 환영합니다, " + customer.getCustomerName() + "님");
             System.out.println("등급: " + customer.getCustomerRank());
-            if ("4".equals(customer.getCustomerRank())) {
+            if ("ma".equals(customer.getCustomerRank())) {
                 System.out.println("관리자입니다.");
             }
         } else {
@@ -69,7 +69,7 @@ public class Main {
         System.out.print("전화번호를 입력하세요: ");
         String phone = scanner.nextLine();
 
-        String rank = "1";
+        String rank = "n1";
 
         Customer newCustomer = new Customer(id, pw, name, phone, rank);
         customerMapper.insertCustomer(newCustomer);
