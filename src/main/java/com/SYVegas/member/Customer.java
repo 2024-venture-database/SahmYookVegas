@@ -6,6 +6,7 @@ public class Customer {
     private String customerPw;
     private String customerName;
     private String customerPhone;
+    private String customerRank;
 
 
     public String getCustomerId() {
@@ -40,10 +41,19 @@ public class Customer {
         this.customerPhone = customerPhone;
     }
 
-    public Customer(String customerId, String customerPw, String customerName, String customerPhone) {
+    public String getCustomerRank() {
+        return customerRank;
+    }
+
+    public void setCustomerRank(String customerRank) {
+        this.customerRank = customerRank;
+    }
+
+    public Customer(String customerId, String customerPw, String customerName, String customerPhone, String customerRank) {
         this.customerId = customerId;
         this.customerPw = customerPw;
         this.customerName = customerName;
         this.customerPhone = customerPhone;
+        this.customerRank = customerRank;
     }
 }

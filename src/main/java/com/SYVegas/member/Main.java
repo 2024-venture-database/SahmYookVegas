@@ -50,6 +50,10 @@ public class Main {
         Customer customer = customerMapper.getCustomerByIdAndPassword(credentials);
         if (customer != null) {
             System.out.println("로그인 성공! 환영합니다, " + customer.getCustomerName() + "님");
+            System.out.println("등급: " + customer.getCustomerRank());
+            if ("4".equals(customer.getCustomerRank())) {
+                System.out.println("관리자입니다.");
+            }
         } else {
             System.out.println("아이디 또는 비밀번호가 올바르지 않습니다.");
         }
@@ -65,7 +69,9 @@ public class Main {
         System.out.print("전화번호를 입력하세요: ");
         String phone = scanner.nextLine();
 
-        Customer newCustomer = new Customer(id, pw, name, phone);
+        String rank = "1";
+
+        Customer newCustomer = new Customer(id, pw, name, phone, rank);
         customerMapper.insertCustomer(newCustomer);
         System.out.println("회원가입이 완료되었습니다.");
     }

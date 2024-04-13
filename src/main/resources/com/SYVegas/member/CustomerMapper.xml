@@ -11,7 +11,7 @@
 
     <!-- 아이디와 비밀번호로 사용자 조회를 위한 SELECT 쿼리 -->
     <select id="getCustomerByIdAndPassword" parameterType="java.util.Map" resultType="com.SYVegas.member.Customer">
-        SELECT * FROM customer
+        SELECT *, customer_rank as customerRank FROM customer
         WHERE customer_id = #{customerId} AND customer_password = #{customerPw}
     </select>
 </mapper>
