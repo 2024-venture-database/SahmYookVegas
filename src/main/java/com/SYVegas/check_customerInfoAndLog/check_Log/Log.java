@@ -71,7 +71,7 @@ public class Log {
     @Override
     public String toString() {
         return   code +
-                " [이용자ID]: " + customer_id +
+                " [이용자 ID]: " + customer_id +
                 " [날짜]: " + date +
                 " [사용처]: " + activity +
                 " [금액]:  "+ money +

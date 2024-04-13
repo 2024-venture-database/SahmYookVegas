@@ -7,7 +7,7 @@
     <resultMap id="managerMenuLogResultMap" type="com.SYVegas.check_customerInfoAndLog.check_Log.Log">
         <id property="code" column="log_code"/>
         <result property="customer_id" column="log_customer_id"/>
-        <result property="date" column="=log_date"/>
+        <result property="date" column="log_date"/>
         <result property="activity" column="log_activiy"/>
         <result property="money" column="log_money"/>
         <result property="kind_money" column="log_kind_money"/>
