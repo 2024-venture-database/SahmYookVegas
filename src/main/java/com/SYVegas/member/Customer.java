@@ -7,8 +7,6 @@ public class Customer {
     private String customerName;
     private String customerPhone;
 
-    // 생성자, getter, setter 생략
-
 
     public String getCustomerId() {
         return customerId;
