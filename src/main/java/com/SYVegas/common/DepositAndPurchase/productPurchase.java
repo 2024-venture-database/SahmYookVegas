@@ -38,7 +38,7 @@ public class productPurchase {
         System.out.println("==================================================");
 
         int no = sc.nextInt();
-        String productType = "";
+        String productType;
 
         switch (no) {
             case 1: productType = "술";  break;
@@ -63,7 +63,7 @@ public class productPurchase {
 
         if (productList != null && productList.size() > 0) {
             System.out.println("---------------[" + productType + "]---------------");
-            ProductDTO product = null;
+            ProductDTO product;
             for (int i = 0; i < productList.size(); i++) {
                 product = productList.get(i);
                 System.out.println("[" + (i + 1) + "] " + product.getName() + " - "+ product.getPrice() + "원");
@@ -86,8 +86,6 @@ public class productPurchase {
 
     // 상품 구매
     public void purchaseProduct(ProductDTO product, int payment, String customerId) {
-        Scanner sc = new Scanner(System.in);
-
         int totalPrice = -(product.getPrice());
 
         SqlSession sqlSession = getSqlSession();
