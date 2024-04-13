@@ -4,9 +4,9 @@ import java.io.Serializable;
 
 public class CustomerDTO implements Serializable {
 
-    /*CREATE TABLE customer
-            (
-                    customer_id VARCHAR(255) NOT NULL, -- 이용자 ID ,중복 허용 X, 기본키
+    /* CREATE TABLE customer
+(
+    customer_id VARCHAR(255) NOT NULL, -- 이용자 ID ,중복 허용 X, 기본키
     customer_password VARCHAR(255) NOT NULL, -- 이용자 비밀번호
     customer_name VARCHAR(255) NOT NULL, -- 이용자 이름
     customer_phone VARCHAR(255) default 'none', -- 이용자 전화번호 null 가능
@@ -16,7 +16,7 @@ public class CustomerDTO implements Serializable {
     customer_rank varchar(255) default 'n1', -- 이용자 등급 코드(외래키)
     PRIMARY KEY (customer_id),
     FOREIGN KEY (customer_rank) REFERENCES vegas_rank(vegas_rank_id)
-            );*/
+);*/
 
     private String id;
     private String password;
@@ -97,14 +97,15 @@ public class CustomerDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "CustomerDTO{" +
-                "id='" + id + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", balance=" + balance +
-                ", credit=" + credit +
-                ", rank='" + rank + '\'' +
-                '}';
+        return
+                id +" 의 정보 "+
+                ", 비밀번호: '" + password + '\'' +
+                ", 이름: '" + name + '\'' +
+                ", 전화번호: '" + phone + '\'' +
+                ", 잔액: " + balance +
+                ", 크레딧: " + credit +
+                ", 등급: '" + rank + '\'' +
+                "\n";
     }
+
 }
