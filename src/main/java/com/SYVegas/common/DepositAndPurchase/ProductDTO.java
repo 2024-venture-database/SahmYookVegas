@@ -1,20 +1,24 @@
 package com.SYVegas.common.DepositAndPurchase;
 
-public class ProductDTO {
+import java.io.Serializable;
+
+public class ProductDTO implements Serializable {
 
     private int code;
     private String type;
     private String name;
     private int price;
+    private int quantity;
 
     public ProductDTO() {
     }
 
-    public ProductDTO(int code, String type, String name, int price) {
+    public ProductDTO(int code, String type, String name, int price, int quantity) {
         this.code = code;
         this.type = type;
         this.name = name;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public int getCode() {
@@ -31,6 +35,14 @@ public class ProductDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getName() {
@@ -51,11 +63,13 @@ public class ProductDTO {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "ProductDTO{" +
                 "code=" + code +
                 ", type='" + type + '\'' +
                 ", name='" + name + '\'' +
                 ", price=" + price +
+                ", quantity=" + quantity +
                 '}';
     }
 }
+

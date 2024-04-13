@@ -1,16 +1,29 @@
 package com.SYVegas.common.DepositAndPurchase;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SYUVegasMapper {
 
-    void depositManager(int choice, int i);
+    //상품 구매
+    int updateCustomerBalance(int depositAmount);
 
-    void purchaseProduct(int choice, String name, int productPrice);
+    void updateCreditBalance(float creditAmount);
 
-    int updateCustomerBalance(int depositAmount, int customerId);
+    List<ProductDTO> getproductListByType(String productType);
 
-    float getVegasCreditRateByRank();
+    void updateProductQuantity(int code, int qty);
 
-    void updateCreditBalance(float creditAmount, int customerId);
+    void insertPurchaseLog(Object o, Object o1, Object o2, String 상품구매, String customerId);
+
+
+    //지갑 충전
+
+    int updateCustomerWallet(Map<String, Object> parameters);
+
+    int getCustomerBalance(String customerId);
+
+    float getCustomerCreditRate(String customerId);
+
+    int getCustomerCredit(String customerId);
 }
