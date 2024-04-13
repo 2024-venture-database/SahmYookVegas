@@ -9,8 +9,11 @@ public class Prototype {
         String user = "syvegas";
         String password = "syvegas";
 
+        // LogDAO 객체 생성
         LogDAO logDAO = new LogDAO(url, user, password);
-        logDAO.displayLog();
+
+        // 데이터 삽입 메서드 호출
+        logDAO.insertLog();
 
         Scanner scanner = new Scanner(System.in);
         boolean running = true;

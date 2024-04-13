@@ -2,40 +2,30 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.SYVegas.chip.ChipMapper">
+<mapper namespace="com.SYVegas.check_customerInfoAndLog.check_Log.ManagerMenuLogSqlMapper">
 
-    <resultMap id="chipResultMap" type="com.SYVegas.chip.Chip">
-        <id property="id" column="chip_id"/>
-        <result property="type" column="chip_type"/>
-        <result property="value" column="chip_value"/>
-        <result property="quantity" column="chip_quantity"/>
+    <resultMap id="managerMenuLogResultMap" type="com.SYVegas.check_customerInfoAndLog.check_Log.Log">
+        <id property="code" column="log_code"/>
+        <result property="customer_id" column="log_customer_id"/>
+        <result property="date" column="log_date"/>
+        <result property="activity" column="log_activiy"/>
+        <result property="money" column="log_money"/>
+        <result property="kind_money" column="log_kind_money"/>
     </resultMap>
 
-    <select id="selectAllChips" resultMap="chipResultMap">
-        SELECT *
-        FROM chips
+    <select id="selectAllMangerMenuLog" resultMap="managerMenuLogResultMap">
+        select *
+        from log
     </select>
 
-    <select id="selectChipsByType" parameterType="java.lang.String" resultMap="chipResultMap">
-        SELECT *
-        FROM chips
-        WHERE chip_type = #{type}
+    <select id="searchCustomerMangerMenuLog" parameterType="hashmap" resultMap="managerMenuLogResultMap">
+        select *
+        from log
+        where log_customer_id = #{Cname}
     </select>
 
-    <insert id="insertChip" parameterType="com.SYVegas.chip.Chip">
-        INSERT INTO chips (chip_type, chip_value, chip_quantity)
-        VALUES (#{type}, #{value}, #{quantity})
-    </insert>
-
-    <update id="updateChip" parameterType="com.SYVegas.chip.Chip">
-        UPDATE chips
-        SET chip_value = #{value}, chip_quantity = #{quantity}
-        WHERE chip_id = #{id}
-    </update>
-
-    <delete id="deleteChip" parameterType="int">
-        DELETE FROM chips
-        WHERE chip_id = #{id}
-    </delete>
-
+    <select id="sumAllMangerMenuLog" resultType="java.lang.Integer" >
+        SELECT SUM(log_money) AS sum_result
+        from log
+    </select>
 </mapper>

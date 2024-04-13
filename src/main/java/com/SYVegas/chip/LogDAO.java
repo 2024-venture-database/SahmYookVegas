@@ -13,24 +13,20 @@ public class LogDAO {
         this.password = password;
     }
 
-    public void displayLog() {
+    public void insertLog() {
         try (Connection connection = DriverManager.getConnection(url, user, password);
-             Statement statement = connection.createStatement();
-             ResultSet resultSet = statement.executeQuery("SELECT * FROM log")) {
+             Statement statement = connection.createStatement()) {
 
-            while (resultSet.next()) {
-                int log_id = resultSet.getInt("log_id");
-                Date log_date = resultSet.getDate("log_date");
-                double log_money = resultSet.getDouble("log_money");
-                String log_kind_money = resultSet.getString("log_kind_money");
-                String log_activity = resultSet.getString("log_activity");
-                String log_customer_id = resultSet.getString("log_customer_id");
+            // SQL 쿼리 실행
+            statement.executeUpdate("insert into log(log_date, log_money, log_kind_money, log_activity, log_customer_id) " +
+                    "values(curdate(),5000000,'지갑','충전','hhh'), " +
+                    "(curdate(),-200000,'지갑','칩교환','aaa'), " +
+                    "(curdate(),-200000,'지갑','칩교환','hhh'), " +
+                    "(curdate(),300000,'지갑','칩반환','hhh'), " +
+                    "(curdate(),-2000,'크레딧','상품구매','bbb')");
 
-                // 결과 출력 또는 다른 작업 수행
-                System.out.println("Log ID: " + log_id + ", Date: " + log_date + ", Money: " + log_money +
-                        ", Kind of Money: " + log_kind_money + ", Activity: " + log_activity +
-                        ", Customer ID: " + log_customer_id);
-            }
+            System.out.println("Data inserted successfully.");
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
