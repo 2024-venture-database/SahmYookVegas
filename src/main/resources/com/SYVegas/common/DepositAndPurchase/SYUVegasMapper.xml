@@ -21,7 +21,6 @@
         <result property="rank" column="customer_rank"/>
     </resultMap>
 
-
     <!-- 상품 구매 -->
     <select id="getproductListByType" resultMap="productResultMap">
         SELECT product_name, product_price, product_quantity
@@ -44,8 +43,6 @@
     <update id="updateProductQuantity">
         UPDATE product SET product_quantity = product_quantity - #{quantity} WHERE product_id = #{productId}
     </update>
-
-
 
     <!-- 돈 충전 -->
 

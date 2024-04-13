@@ -14,7 +14,6 @@ public interface SYUVegasMapper {
     List<ProductDTO> getproductListByType(String productType);
 
 
-
     //지갑 충전
 
     int updateCustomerWallet(Map<String, Object> parameters);
@@ -24,6 +23,5 @@ public interface SYUVegasMapper {
     float getCustomerCreditRate(String customerId);
 
     int getCustomerCredit(String customerId);
-
 
 }

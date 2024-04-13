@@ -1,7 +1,6 @@
 package com.SYVegas.common.DepositAndPurchase;
 
 import org.apache.ibatis.session.SqlSession;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -17,10 +16,14 @@ public class depositManager {
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
-        System.out.println("고객 ID를 입력하세요 : ");
+        System.out.println("=======================");
+        System.out.println("고객 ID를 입력하세요 ");
+        System.out.println("=======================");
         String customerId = sc.nextLine();
 
-        System.out.println("충전할 금액을 입력하세요 : ");
+        System.out.println("=======================");
+        System.out.println("충전할 금액을 입력하세요");
+        System.out.println("=======================");
         int depositAmount = sc.nextInt();
 
         int currentBalance = mapper.getCustomerBalance(customerId);
@@ -37,11 +40,13 @@ public class depositManager {
         parameters.put("customerId", customerId);
         parameters.put("newCreditBalance", newCreditBalance);
 
-        int result = mapper.updateCustomerWallet(parameters);
-
-        System.out.println("충전이 완료되었습니다.");
-        System.out.println("지갑 잔액 : " + newBalance + "원");
-        System.out.println("크레딧 잔액 : " + newCreditBalance + "원");
+        System.out.println("===========================================");
+        System.out.println("충전이 완료되었습니다!");
+        System.out.println("===========================================");
+        System.out.println(" \uD83D\uDCB0지갑 잔액 : " + newBalance + "원");
+        System.out.println("-------------------------------------------");
+        System.out.println(" \uD83D\uDCB0크레딧 잔액 : " + newCreditBalance + "원");
+        System.out.println("============================================");
 
         sqlSession.commit();
         sqlSession.close();
