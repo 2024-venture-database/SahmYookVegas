@@ -9,9 +9,9 @@ import static com.SYVegas.common.Template.getSqlSession;
 
 public class depositManager {
 
-    private SYUVegasMapper mapper;
+    private static SYUVegasMapper mapper;
 
-    public void depositMoney() {
+    public static void depositMoney() {
 
         Scanner sc = new Scanner(System.in);
         SqlSession sqlSession = getSqlSession();
@@ -43,6 +43,7 @@ public class depositManager {
         System.out.println("지갑 잔액 : " + newBalance + "원");
         System.out.println("크레딧 잔액 : " + newCreditBalance + "원");
 
+        sqlSession.commit();
         sqlSession.close();
     }
 }

@@ -21,21 +21,23 @@
         <result property="rank" column="customer_rank"/>
     </resultMap>
 
+
+    <!-- 상품 구매 -->
     <select id="getproductListByType" resultMap="productResultMap">
         SELECT product_name, product_price, product_quantity
         FROM product
         WHERE product_type = #{productType}
     </select>
 
-    <update id="updateCustomerBalance">
+    <update id="updateCustomerBalance" parameterType="hashmap">
         UPDATE customer
-        SET customer_balance = customer_balance + #{depositAmount}
+        SET customer_balance = customer_balance + #{totalPrice}
         WHERE customer_id = #{customerId}
     </update>
     
-    <update id="updateCreditBalance">
+    <update id="updateCreditBalance" parameterType="hashmap">
         UPDATE customer
-        SET customer_credit = customer_credit + #{creditAmount}
+        SET customer_credit = customer_credit + #{totalPrice}
         WHERE customer_id = #{customerId}
     </update>
 
@@ -43,10 +45,6 @@
         UPDATE product SET product_quantity = product_quantity - #{quantity} WHERE product_id = #{productId}
     </update>
 
-    <insert id="insertPurchaseLog" parameterType="map">
-        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy,  log_customer_id)
-        VALUES (null,null,null, "상품구매", #{customer_id})
-    </insert>
 
 
     <!-- 돈 충전 -->
