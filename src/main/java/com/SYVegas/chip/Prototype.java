@@ -1,40 +1,58 @@
 package com.SYVegas.chip;
 
 import java.util.Scanner;
-import com.SYVegas.chip.ChipExchangeService;
-import com.SYVegas.chip.ChipExchangeServiceImpl;
-import com.SYVegas.chip.ChipReturnService;
-import com.SYVegas.chip.ChipReturnServiceImpl;
 
 public class Prototype {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        boolean running = true;
 
-        // 칩 교환 기능 사용 예시
-        ChipExchangeService chipExchangeService = new ChipExchangeServiceImpl();
-        System.out.print("교환할 돈을 입력하세요: ");
-        int moneyToExchange = scanner.nextInt();
-        System.out.println("칩 종류 및 개수를 입력하세요:");
-        int[] chipCounts = new int[5];
-        String[] chipTypes = {"1만원짜리", "5만원짜리", "10만원짜리", "50만원짜리", "100만원짜리"};
-        for (int i = 0; i < chipCounts.length; i++) {
-            System.out.print(chipTypes[i] + " 칩 개수: ");
-            chipCounts[i] = scanner.nextInt();
-        }
-        chipExchangeService.exchangeChips(moneyToExchange, chipCounts); // 교환된 돈은 반환값으로 받지 않음
-        int exchangedAmount = chipExchangeService.getExchangedAmount();
-        System.out.println("교환된 총액: " + exchangedAmount);
+        while (running) {
+            System.out.println("원하는 기능을 선택하세요:");
+            System.out.println("1. 칩 교환");
+            System.out.println("2. 칩 반환");
+            System.out.println("3. 종료");
 
-        // 칩 반환 기능 사용 예시
-        ChipReturnService chipReturnService = new ChipReturnServiceImpl();
-        System.out.println("보유한 칩의 개수를 입력하세요:");
-        int[] chipCountsToReturn = new int[5]; // 1만원짜리부터 100만원짜리까지 칩의 개수를 입력하세요
-        for (int i = 0; i < chipCountsToReturn.length; i++) {
-            System.out.print(chipTypes[i] + " 칩 개수: ");
-            chipCountsToReturn[i] = scanner.nextInt();
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+
+                    ChipExchangeService chipExchangeService = new ChipExchangeServiceImpl();
+
+                    int[] chipValues = {10000, 50000, 100000, 500000, 1000000};
+
+                    System.out.println("1만 칩, 5만 칩, 10만 칩, 50만 칩, 100만 칩의 개수를 공백으로 구분하여 입력하세요:");
+                    int[] chipCounts = new int[5];
+                    for (int i = 0; i < chipCounts.length; i++) {
+                        chipCounts[i] = scanner.nextInt();
+                    }
+
+                    int moneyToExchange = 0;
+                    for (int i = 0; i < chipCounts.length; i++) {
+                        moneyToExchange += chipCounts[i] * chipValues[i];
+                    }
+
+                    int exchangedAmount = chipExchangeService.exchangeChips(moneyToExchange, chipCounts);
+                    System.out.println("교환된 총액: " + exchangedAmount + "만원");
+
+                    break;
+
+                case 2:
+                    ChipReturnService chipReturnService = new ChipReturnServiceImpl();
+                    System.out.println("1만 칩, 5만 칩, 10만 칩, 50만 칩, 100만 칩의 개수를 공백으로 구분하여 입력하세요:");
+                    int[] chipCountsToReturn = new int[5];
+                    for (int i = 0; i < chipCountsToReturn.length; i++) {
+                        chipCountsToReturn[i] = scanner.nextInt();
+                    }
+                    int returnedMoney = chipReturnService.returnChips(chipCountsToReturn);
+                    System.out.println("반환된 총액: " + returnedMoney + "만원");
+                    break;
+
+                default:
+                    System.out.println("올바른 메뉴를 선택하세요.");
+                    break;
+            }
         }
-        int returnedMoney = chipReturnService.returnChips(chipCountsToReturn);
-        System.out.println("반환된 총액: " + returnedMoney);
 
         scanner.close();
     }
