@@ -4,7 +4,7 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.SYVegas.chip.ChipSqlMapper">
 
-    <resultMap id="logResultMap" type="Log">
+    <resultMap id="logResultMap" type="LogDTO">
         <id property="log_code" column="log_code"/>
         <result property="log_date" column="log_date"/>
         <result property="log_money" column="log_money"/>
