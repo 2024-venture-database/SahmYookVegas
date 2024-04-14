@@ -1,8 +1,6 @@
 package com.SYVegas.common.DepositAndPurchase;
 
-import java.io.Serializable;
-
-public class depositDTO {
+public class DepositDTO {
 
         private String id;
         private String name;
@@ -10,10 +8,10 @@ public class depositDTO {
         private int credit;
         private String rank;
 
-    public depositDTO() {
+    public DepositDTO() {
     }
 
-    public depositDTO(String id, String name, int balance, int credit, String rank) {
+    public DepositDTO(String id, String name, int balance, int credit, String rank) {
         this.id = id;
         this.name = name;
         this.balance = balance;

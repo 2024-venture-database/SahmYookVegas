@@ -1,18 +1,21 @@
 package com.SYVegas.member;
 
-import com.SYVegas.common.Template;
+import com.SYVegas.check_customerInfoAndLog.Prototype;
+import com.SYVegas.common.CurrentUser;
+import com.SYVegas.common.DepositAndPurchase.DepositManager;
+import com.SYVegas.common.DepositAndPurchase.ProductPurchase;
+import com.SYVegas.customerMyInfo.testapplication;
+import com.SYVegas.playgame.PlayGame;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
 public class Main {
+    public static String mainId;
 
     // 나중에 메소드화 할예정
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        CustomerMapper customerMapper = Template.getSqlSession().getMapper(CustomerMapper.class);
-
+    public static void runMenu(Scanner scanner, CustomerMapper customerMapper) {
         while (true) {
             System.out.println("1. 로그인");
             System.out.println("2. 회원가입");
@@ -46,6 +49,7 @@ public class Main {
     private static void login(Scanner scanner, CustomerMapper customerMapper) {
         System.out.print("아이디를 입력하세요: ");
         String id = scanner.nextLine();
+        mainId=id;
         System.out.print("비밀번호를 입력하세요: ");
         String pw = scanner.nextLine();
 
@@ -58,9 +62,12 @@ public class Main {
             System.out.println("로그인 성공! 환영합니다, " + customer.getCustomerName() + "님");
             System.out.println("등급: " + customer.getCustomerRank());
             // 로그인 성공 시 메인 메뉴 호출
-            printMainMenu(scanner, customerMapper);
             if ("ma".equals(customer.getCustomerRank())) {
                 System.out.println("관리자입니다.");
+                Prototype prototype =new Prototype();
+                prototype.managerPrototypeStart();
+            }else{
+                printMainMenu(scanner, customerMapper);
             }
         } else {
             System.out.println("아이디 또는 비밀번호가 올바르지 않습니다.");
@@ -85,6 +92,7 @@ public class Main {
     }
 
     private static void printMainMenu(Scanner scanner, CustomerMapper customerMapper) {
+        CurrentUser currentUser=new CurrentUser(mainId,50,50,50,50,50);
         while (true) {
             System.out.println("1. 내 정보 조회");
             System.out.println("2. 충전");
@@ -103,10 +111,14 @@ public class Main {
                     case 1:
                         // 내 정보 조회 메소드 실행
                         // 이 부분은 내 정보 조회에 해당하는 메소드 호출로 대체되어야 합니다.
+                        testapplication testapplication=new testapplication();
+                        testapplication.testApplication(currentUser);
                         break;
                     case 2:
                         // 충전 메소드 실행
                         // 이 부분은 충전에 해당하는 메소드 호출로 대체되어야 합니다.
+                        DepositManager depositManager=new DepositManager();
+                        depositManager.depositMoney(currentUser);
                         break;
                     case 3:
                         // 칩 교환 메소드 실행
@@ -119,10 +131,14 @@ public class Main {
                     case 5:
                         // 상품 구매 메소드 실행
                         // 이 부분은 상품 구매에 해당하는 메소드 호출로 대체되어야 합니다.
+                        ProductPurchase productPurchase=new ProductPurchase();
+                        productPurchase.productPaymentType(currentUser);
                         break;
                     case 6:
                         // 게임 시작 메소드 실행
                         // 이 부분은 게임 시작에 해당하는 메소드 호출로 대체되어야 합니다.
+                        PlayGame playGame=new PlayGame();
+                        playGame.gamePlay(currentUser);
                         break;
                     case 7:
                         System.out.println("로그아웃합니다.");

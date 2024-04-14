@@ -1,5 +1,6 @@
 package com.SYVegas.customerMyInfo;
 
+import com.SYVegas.common.CurrentUser;
 import com.SYVegas.common.Template;
 import org.apache.ibatis.session.SqlSession;
 
@@ -7,10 +8,9 @@ import java.util.Scanner;
 
 public class testapplication {
 
-    public static void main(String[] args) {
+    public void testApplication(CurrentUser currentUser) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("ID를 입력하세요: ");
-        String id = scanner.nextLine();
+        String id = currentUser.getCurrentUserId();
 
         CustomerDTO customer = searchCustomerById(id);
         if (customer != null) {

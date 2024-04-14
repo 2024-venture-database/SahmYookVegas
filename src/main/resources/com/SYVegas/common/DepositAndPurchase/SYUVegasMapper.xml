@@ -13,7 +13,7 @@
         <result property="quantity" column="product_quantity"/>
     </resultMap>
 
-    <resultMap id="customerResultMap" type="com.SYVegas.common.DepositAndPurchase.depositDTO">
+    <resultMap id="customerResultMap" type="com.SYVegas.common.DepositAndPurchase.DepositDTO">
         <id property="id" column="customer_id"/>
         <result property="name" column="customer_name"/>
         <result property="balance" column="customer_balance"/>

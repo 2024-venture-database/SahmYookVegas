@@ -1,28 +1,27 @@
 package com.SYVegas.common.DepositAndPurchase;
 
+import com.SYVegas.common.CurrentUser;
 import org.apache.ibatis.session.SqlSession;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 import static com.SYVegas.common.Template.getSqlSession;
 
-public class depositManager {
+public class DepositManager {
 
     private static SYUVegasMapper mapper;
 
-    public static void depositMoney() {
+    public static void depositMoney(CurrentUser currentUser) {
 
         Scanner sc = new Scanner(System.in);
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
-        System.out.println("=======================");
-        System.out.println("고객 ID를 입력하세요 ");
-        System.out.println("=======================");
-        String customerId = sc.nextLine();
+        String customerId = currentUser.getCurrentUserId();
 
         int depositAmount;
         do{
+            System.out.println( customerId+" 이용객님");
             System.out.println("=======================");
             System.out.println("충전할 금액을 입력하세요");
             System.out.println("=======================");
