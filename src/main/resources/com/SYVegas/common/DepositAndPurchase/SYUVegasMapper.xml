@@ -39,10 +39,6 @@
         WHERE customer_id = #{customerId}
     </update>
 
-    <update id="updateProductQuantity">
-        UPDATE product SET product_quantity = product_quantity - #{quantity} WHERE product_id = #{productId}
-    </update>
-
     <!-- 돈 충전 -->
 
     <select id="getCustomerBalance" resultType="int" parameterType="String">
@@ -59,7 +55,8 @@
 
     <update id="updateCustomerWallet" parameterType="hashmap">
         UPDATE customer
-        SET customer_balance = customer_balance + #{depositAmount}
+        SET customer_balance = customer_balance + #{depositAmount},
+            customer_credit = customer_credit + #{newCreditBalance}
         WHERE customer_id = #{customerId}
     </update>
 

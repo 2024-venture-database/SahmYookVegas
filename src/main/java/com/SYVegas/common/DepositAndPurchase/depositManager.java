@@ -46,6 +46,7 @@ public class depositManager {
         parameters.put("depositAmount", depositAmount);
         parameters.put("customerId", customerId);
         parameters.put("newCreditBalance", newCreditBalance);
+        mapper.updateCustomerWallet(parameters);
 
         System.out.println("===========================================");
         System.out.println("충전이 완료되었습니다!");
