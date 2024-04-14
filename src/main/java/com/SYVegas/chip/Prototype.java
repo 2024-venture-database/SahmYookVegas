@@ -1,6 +1,5 @@
 package com.SYVegas.chip;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class Prototype {
@@ -10,19 +9,22 @@ public class Prototype {
         System.out.println("이용할 서비스를 선택하세요.");
         System.out.println("1. 칩 교환");
         System.out.println("2. 칩 반환");
-        int serviceOption = scanner.nextInt();
 
-        if (serviceOption == 1) {
-            ChipExchangeService chipExchangeService = new ChipExchangeService();
-            Map<String, Object> inputKey = ChipExchangeService.inputChipKey(serviceOption);
-            chipExchangeService.exchangeChips(inputKey);
-        } else if (serviceOption == 2) {
-            ChipReturnService chipReturnService = new ChipReturnService();
-            Map<String, Object> inputKey = ChipReturnService.inputChipKey(serviceOption);
-            chipReturnService.returnChips(inputKey);
-        } else {
-            System.out.println("올바른 서비스 옵션을 선택해주세요.");
+        int serviceOption = 0;
+        while (serviceOption != 1 && serviceOption != 2) {
+            System.out.print("선택: ");
+            if (scanner.hasNextInt()) {
+                serviceOption = scanner.nextInt();
+                if (serviceOption != 1 && serviceOption != 2) {
+                    System.out.println("잘못된 옵션입니다. 다시 선택해주세요.");
+                }
+            } else {
+                System.out.println("숫자를 입력해주세요.");
+                scanner.next(); // 잘못된 입력 제거
+            }
         }
+
+        ChipService.runService(serviceOption);
 
         scanner.close();
     }
