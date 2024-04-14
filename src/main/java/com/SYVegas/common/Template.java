@@ -25,6 +25,6 @@ public class Template {
             }
         }
 
-        return sqlSessionFactory.openSession(false);
+        return sqlSessionFactory.openSession(true);
     }
 }
