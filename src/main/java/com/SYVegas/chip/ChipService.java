@@ -17,6 +17,7 @@ public class ChipService {
         System.out.println("사용자 ID를 입력하세요: ");
         String id = sc.nextLine();
 
+        System.out.println("======================");
         System.out.println("(1.교환, 2.반환)");
         System.out.println("원하는 작업을 선택하세요: ");
         int attribute = sc.nextInt();
@@ -29,6 +30,7 @@ public class ChipService {
 
         if (chipCounts == null) {
             chipCounts = new HashMap<>();
+            System.out.println("======================");
             System.out.println("1칩, 5칩, 10칩, 50칩, 100칩 각각 몇 개씩 교환/반환하시겠습니까? (공백으로 구분하여 입력)");
             String[] chipInput = sc.nextLine().split(" ");
             chipCounts.put("1칩", Integer.parseInt(chipInput[0]));
