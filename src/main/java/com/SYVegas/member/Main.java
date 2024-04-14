@@ -57,6 +57,8 @@ public class Main {
         if (customer != null) {
             System.out.println("로그인 성공! 환영합니다, " + customer.getCustomerName() + "님");
             System.out.println("등급: " + customer.getCustomerRank());
+            // 로그인 성공 시 메인 메뉴 호출
+            printMainMenu(scanner, customerMapper);
             if ("ma".equals(customer.getCustomerRank())) {
                 System.out.println("관리자입니다.");
             }
@@ -80,5 +82,58 @@ public class Main {
         Customer newCustomer = new Customer(id, pw, name, phone, rank);
         customerMapper.insertCustomer(newCustomer);
         System.out.println("회원가입이 완료되었습니다.");
+    }
+
+    private static void printMainMenu(Scanner scanner, CustomerMapper customerMapper) {
+        while (true) {
+            System.out.println("1. 내 정보 조회");
+            System.out.println("2. 충전");
+            System.out.println("3. 칩 교환");
+            System.out.println("4. 칩 반환");
+            System.out.println("5. 상품 구매");
+            System.out.println("6. 게임 시작");
+            System.out.println("7. 로그아웃");
+            System.out.print("메뉴를 선택하세요: ");
+            String input = scanner.nextLine();
+
+            // 입력값이 숫자인지 확인
+            if (input.matches("\\d+")) {
+                int choice = Integer.parseInt(input);
+                switch (choice) {
+                    case 1:
+                        // 내 정보 조회 메소드 실행
+                        // 이 부분은 내 정보 조회에 해당하는 메소드 호출로 대체되어야 합니다.
+                        break;
+                    case 2:
+                        // 충전 메소드 실행
+                        // 이 부분은 충전에 해당하는 메소드 호출로 대체되어야 합니다.
+                        break;
+                    case 3:
+                        // 칩 교환 메소드 실행
+                        // 이 부분은 칩 교환에 해당하는 메소드 호출로 대체되어야 합니다.
+                        break;
+                    case 4:
+                        // 칩 반환 메소드 실행
+                        // 이 부분은 칩 반환에 해당하는 메소드 호출로 대체되어야 합니다.
+                        break;
+                    case 5:
+                        // 상품 구매 메소드 실행
+                        // 이 부분은 상품 구매에 해당하는 메소드 호출로 대체되어야 합니다.
+                        break;
+                    case 6:
+                        // 게임 시작 메소드 실행
+                        // 이 부분은 게임 시작에 해당하는 메소드 호출로 대체되어야 합니다.
+                        break;
+                    case 7:
+                        System.out.println("로그아웃합니다.");
+                        return; // 메소드 종료 및 프로그램 종료
+                    default:
+                        System.out.println("올바른 메뉴를 선택하세요.");
+                        break;
+                }
+            } else {
+                System.out.println("숫자를 입력하세요.");
+            }
+        }
     }
 }
