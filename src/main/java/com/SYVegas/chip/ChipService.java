@@ -2,6 +2,7 @@ package com.SYVegas.chip;
 
 import org.apache.ibatis.session.SqlSession;
 
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,7 +11,7 @@ import static com.SYVegas.common.Template.getSqlSession;
 
 public class ChipService {
 
-    public static void runService(int serviceOption) {
+    public static void runService(int serviceOption, String customerId) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("칩을 입력하세요 (공백으로 구분하여 1칩, 5칩, 10칩, 50칩, 100칩 순으로 입력): ");
         String[] nums = scanner.nextLine().split(" ");
@@ -25,10 +26,10 @@ public class ChipService {
 
         switch (serviceOption) {
             case 1:
-                exchangeChips(inputKey);
+                exchangeChips(inputKey, customerId);
                 break;
             case 2:
-                returnChips(inputKey);
+                returnChips(inputKey, customerId);
                 break;
             default:
                 System.out.println("올바르지 않은 서비스 옵션입니다.");
@@ -38,7 +39,9 @@ public class ChipService {
         scanner.close();
     }
 
-    private static void exchangeChips(Map<String, Object> inputKey) {
+    private static void exchangeChips(Map<String, Object> inputKey, String customerId) {
+        inputKey.put("log_customer_id", customerId);
+        inputKey.put("attribute", 1);
         try (SqlSession sqlSession = getSqlSession()) {
             ChipSqlMapper mapper = sqlSession.getMapper(ChipSqlMapper.class);
             int result = mapper.updateChipDTO(inputKey);
@@ -54,7 +57,7 @@ public class ChipService {
         }
     }
 
-    private static void returnChips(Map<String, Object> inputKey) {
+    private static void returnChips(Map<String, Object> inputKey, String customerId) {
         try (SqlSession sqlSession = getSqlSession()) {
             ChipSqlMapper mapper = sqlSession.getMapper(ChipSqlMapper.class);
             int result = mapper.updateChipDTO(inputKey);

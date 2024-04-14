@@ -24,7 +24,9 @@ public class Prototype {
             }
         }
 
-        ChipService.runService(serviceOption);
+        String customerId = "exampleCustomerId";
+
+        ChipService.runService(serviceOption, customerId);
 
         scanner.close();
     }
