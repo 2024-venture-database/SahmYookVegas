@@ -3,20 +3,14 @@ package com.SYVegas.chip;
 public class ChipDTO implements java.io.Serializable {
 
     private int chipId;
-    private String chipName;
-    private String chipDescription;
-    private String chipType;
-    private String chipStatus;
+    private int attribute;
 
     public ChipDTO() {
     }
 
-    public ChipDTO(int chipId, String chipName, String chipDescription, String chipType, String chipStatus) {
+    public ChipDTO(int chipId, int attribute) {
         this.chipId = chipId;
-        this.chipName = chipName;
-        this.chipDescription = chipDescription;
-        this.chipType = chipType;
-        this.chipStatus = chipStatus;
+        this.attribute = attribute;
     }
 
     public int getChipId() {
@@ -27,46 +21,19 @@ public class ChipDTO implements java.io.Serializable {
         this.chipId = chipId;
     }
 
-    public String getChipName() {
-        return chipName;
+    public int getAttribute() {
+        return attribute;
     }
 
-    public void setChipName(String chipName) {
-        this.chipName = chipName;
-    }
-
-    public String getChipDescription() {
-        return chipDescription;
-    }
-
-    public void setChipDescription(String chipDescription) {
-        this.chipDescription = chipDescription;
-    }
-
-    public String getChipType() {
-        return chipType;
-    }
-
-    public void setChipType(String chipType) {
-        this.chipType = chipType;
-    }
-
-    public String getChipStatus() {
-        return chipStatus;
-    }
-
-    public void setChipStatus(String chipStatus) {
-        this.chipStatus = chipStatus;
+    public void setAttribute(int attribute) {
+        this.attribute = attribute;
     }
 
     @Override
     public String toString() {
         return "ChipDTO{" +
                 "chipId=" + chipId +
-                ", chipName='" + chipName + '\'' +
-                ", chipDescription='" + chipDescription + '\'' +
-                ", chipType='" + chipType + '\'' +
-                ", chipStatus='" + chipStatus + '\'' +
+                ", attribute=" + attribute +
                 '}';
     }
 }
