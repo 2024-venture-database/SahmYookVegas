@@ -9,9 +9,9 @@ public class Application {
     public static void main(String[] args) {
 //        Prototype prototype=new Prototype();
 //        prototype.managerPrototypeStart();
-        CurrentUser currentUser=new CurrentUser("김상억",50,50,50,50,50);
+        CurrentUser currentUser=new CurrentUser("김상억",2,3,4,6,15);
         PlayGame playGame=new PlayGame();
-        playGame.betting(currentUser);
-        playGame.gameResult(currentUser);
+        playGame.gamePlay(currentUser);
+
     }
 }

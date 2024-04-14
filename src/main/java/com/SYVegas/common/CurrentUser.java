@@ -7,7 +7,7 @@ public class CurrentUser {
     private int chip10=0;
     private int chip5=0;
     private int chip1=0;
-    private String gameResult="win";
+    private String gameResult="lose";
 
     public CurrentUser() {
     }
