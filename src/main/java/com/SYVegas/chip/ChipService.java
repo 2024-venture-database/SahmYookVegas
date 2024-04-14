@@ -10,6 +10,14 @@ public class ChipService {
 
     private final Map<String, Integer> walletMap = new HashMap<>();
 
+    // 사용자의 지갑에 돈 추가하는 메서드
+    public void addMoneyToWallet(String userId, int amount) {
+        int currentAmount = walletMap.getOrDefault(userId, 0);
+        walletMap.put(userId, currentAmount + amount);
+        System.out.println(userId + "님의 지갑에 " + amount + "원이 추가되었습니다.");
+    }
+
+
     public Map<String, Object> chipExchangeReturn(Map<String, Integer> chipCounts) {
         Scanner sc = new Scanner(System.in);
 
