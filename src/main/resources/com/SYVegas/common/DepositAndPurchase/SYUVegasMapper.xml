@@ -22,10 +22,9 @@
     </resultMap>
 
     <!-- 상품 구매 -->
-    <select id="getproductListByType" resultMap="productResultMap">
-        SELECT product_name, product_price, product_quantity
+    <select id="getproductListByType" parameterType="string" resultMap="productResultMap">
+        SELECT product_type, product_name, product_price, product_quantity
         FROM product
-        WHERE product_type = #{productType}
     </select>
 
     <update id="updateCustomerBalance" parameterType="hashmap">
@@ -76,5 +75,10 @@
         JOIN customer c ON vr.vegas_rank_id = c.customer_rank
         WHERE c.customer_id = #{customerId}
     </select>
+
+    <insert id="insertPurchaseLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_activity)
+        VALUES (#{logDate}, #{logMoney} ,#{logActivity})
+    </insert>
 
 </mapper>

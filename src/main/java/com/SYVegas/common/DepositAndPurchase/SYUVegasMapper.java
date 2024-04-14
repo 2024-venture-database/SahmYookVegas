@@ -11,8 +11,9 @@ public interface SYUVegasMapper {
 
     void updateCreditBalance(Map<String, Object> parameters);
 
-    List<ProductDTO> getproductListByType(String productType);
+    List<ProductDTO> getproductListByType();
 
+    void insertPurchaseLog(Map<String, Object> parameters);
 
     //지갑 충전
 
@@ -23,5 +24,6 @@ public interface SYUVegasMapper {
     float getCustomerCreditRate(String customerId);
 
     int getCustomerCredit(String customerId);
+
 
 }

@@ -63,13 +63,7 @@ public class ProductDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "ProductDTO{" +
-                "code=" + code +
-                ", type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                ", quantity=" + quantity +
-                '}';
+        return " [상품 종류] " + type + "  [상품명] " + name + "  [금액] " + price  + "원";
     }
 }
 

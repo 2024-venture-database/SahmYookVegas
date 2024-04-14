@@ -21,10 +21,17 @@ public class depositManager {
         System.out.println("=======================");
         String customerId = sc.nextLine();
 
-        System.out.println("=======================");
-        System.out.println("충전할 금액을 입력하세요");
-        System.out.println("=======================");
-        int depositAmount = sc.nextInt();
+        int depositAmount;
+        do{
+            System.out.println("=======================");
+            System.out.println("충전할 금액을 입력하세요");
+            System.out.println("=======================");
+            depositAmount = sc.nextInt();
+
+            if  (depositAmount <= 0) {
+                System.out.println("충전 금액은 0보다 커야 합니다.");
+            }
+        } while(depositAmount <= 0);
 
         int currentBalance = mapper.getCustomerBalance(customerId);
         int currentCredit = mapper.getCustomerCredit(customerId);
@@ -43,9 +50,9 @@ public class depositManager {
         System.out.println("===========================================");
         System.out.println("충전이 완료되었습니다!");
         System.out.println("===========================================");
-        System.out.println(" \uD83D\uDCB0지갑 잔액 : " + newBalance + "원");
+        System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
         System.out.println("-------------------------------------------");
-        System.out.println(" \uD83D\uDCB0크레딧 잔액 : " + newCreditBalance + "원");
+        System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
         System.out.println("============================================");
 
         sqlSession.commit();
