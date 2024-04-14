@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SYVegas.playgame.GameMapper">
+    <select id="getGameRate" resultType="float">
+        select game_rate
+        from game
+        <if test="gameNum==1">
+            where game_code='r1'
+        </if>
+        <if test="gameNum==2">
+            where game_code='r2'
+        </if>
+
+    </select>
+</mapper>
