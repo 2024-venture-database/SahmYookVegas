@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.SYVegas.chip.ChipExchangeSqlMapper">
+
+    <update id="updateChipDTO" parameterType="hashmap">
+        update log
+        <choose>
+            <when test="attribute == 1">
+                insert into log(attribute, exchange_num1, exchange_num2, exchange_num3, exchange_num4, exchange_num5)
+                values (#{attribute}, #{num1}, #{num2}, #{num3}, #{num4}, #{num5})
+            </when>
+            <otherwise>
+                insert into log(attribute, return_num1, return_num2, return_num3, return_num4, return_num5)
+                values (#{attribute}, #{num1}, #{num2}, #{num3}, #{num4}, #{num5})
+            </otherwise>
+        </choose>
+    </update>
+
+</mapper>
