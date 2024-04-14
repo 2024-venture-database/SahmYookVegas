@@ -99,7 +99,7 @@ public class productPurchase {
             System.out.println("==================================================");
             System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
             System.out.println("==================================================");
-            saveLog(totalPrice);
+            //saveLog(totalPrice);
 
         } else if (payment == 2) {
              if (product.getPrice() > currentCredit) {            // 크레딧 잔액 부족
@@ -115,7 +115,7 @@ public class productPurchase {
             System.out.println("==================================================");
             System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
             System.out.println("==================================================");
-            saveLog(totalPrice);
+           // saveLog(totalPrice);
         } else {
             System.out.println("잘못된 선택입니다.");
             return;
@@ -124,7 +124,8 @@ public class productPurchase {
         System.out.println(product.getName() + "를 구매완료했습니다.");
     }
 
-    public void saveLog(int totalPrice) {
+    /*
+   public void saveLog(int totalPrice) {
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
@@ -137,6 +138,7 @@ public class productPurchase {
 
         sqlSession.commit();
         sqlSession.close();
-    }
+
+    }*/
 
 }
