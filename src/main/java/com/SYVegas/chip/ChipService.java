@@ -14,7 +14,9 @@ public class ChipService {
     public void addMoneyToWallet(String userId, int amount) {
         int currentAmount = walletMap.getOrDefault(userId, 0);
         walletMap.put(userId, currentAmount + amount);
+        System.out.println("=======================");
         System.out.println(userId + "님의 지갑에 " + amount + "원이 추가되었습니다.");
+        System.out.println("=======================");
     }
 
 
@@ -22,11 +24,16 @@ public class ChipService {
         Scanner sc = new Scanner(System.in);
 
         System.out.print("칩 교환/반환 서비스를 시작하겠습니다.");
+        System.out.println();
+        System.out.println("=======================");
         System.out.println("사용자 ID를 입력하세요: ");
+        System.out.println("=======================");
         String id = sc.nextLine();
 
+        System.out.println("=======================");
         System.out.println("(1.교환, 2.반환)");
         System.out.println("원하는 작업을 선택하세요: ");
+        System.out.println("=======================");
         int attribute = sc.nextInt();
         sc.nextLine();
 
@@ -37,7 +44,9 @@ public class ChipService {
 
         if (chipCounts == null) {
             chipCounts = new HashMap<>();
+            System.out.println("=======================");
             System.out.println("1칩, 5칩, 10칩, 50칩, 100칩 각각 몇 개씩 교환/반환하시겠습니까? (공백으로 구분하여 입력)");
+            System.out.println("=======================");
             String[] chipInput = sc.nextLine().split(" ");
             chipCounts.put("1칩", Integer.parseInt(chipInput[0]));
             chipCounts.put("5칩", Integer.parseInt(chipInput[1]));
@@ -86,7 +95,9 @@ public class ChipService {
 
 
         // 지갑 정보 출력
+        System.out.println("=======================");
         System.out.println("지갑 정보: " + walletMap.get(id));
+        System.out.println("=======================");
     }
 }
 
