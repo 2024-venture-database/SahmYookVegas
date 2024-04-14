@@ -2,7 +2,6 @@ package com.SYVegas.chip;
 
 import org.apache.ibatis.session.SqlSession;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -10,8 +9,6 @@ import java.util.Scanner;
 import static com.SYVegas.common.Template.getSqlSession;
 
 public class ChipService {
-
-    private static ChipSqlMapper mapper;
 
     public static void runService(int serviceOption) {
         Scanner scanner = new Scanner(System.in);
@@ -26,14 +23,11 @@ public class ChipService {
             inputKey.put("num" + (i + 1), Integer.parseInt(nums[i]));
         }
 
-        // 서비스 옵션에 따라 처리
         switch (serviceOption) {
             case 1:
-                // 교환 로직 수행
                 exchangeChips(inputKey);
                 break;
             case 2:
-                // 반환 로직 수행
                 returnChips(inputKey);
                 break;
             default:
@@ -45,34 +39,45 @@ public class ChipService {
     }
 
     private static void exchangeChips(Map<String, Object> inputKey) {
-        SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(ChipSqlMapper.class);
+        try (SqlSession sqlSession = getSqlSession()) {
+            ChipSqlMapper mapper = sqlSession.getMapper(ChipSqlMapper.class);
+            int result = mapper.updateChipDTO(inputKey);
 
-        int result = mapper.updateChipDTO(inputKey);
-
-        if (result > 0) {
-            System.out.println("칩을 교환했습니다.");
-            sqlSession.commit();
-        } else {
-            System.out.println("칩 교환에 실패했습니다.");
-            sqlSession.rollback();
+            if (result > 0) {
+                int totalValue = calculateTotalChipValue(inputKey);
+                System.out.println("칩을 교환했습니다.");
+                sqlSession.commit();
+            } else {
+                System.out.println("칩 교환에 실패했습니다.");
+                sqlSession.rollback();
+            }
         }
-        sqlSession.close();
     }
 
     private static void returnChips(Map<String, Object> inputKey) {
-        SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(ChipSqlMapper.class);
+        try (SqlSession sqlSession = getSqlSession()) {
+            ChipSqlMapper mapper = sqlSession.getMapper(ChipSqlMapper.class);
+            int result = mapper.updateChipDTO(inputKey);
 
-        int result = mapper.updateChipDTO(inputKey);
-
-        if (result > 0) {
-            System.out.println("칩을 반환했습니다.");
-            sqlSession.commit();
-        } else {
-            System.out.println("칩 반환에 실패했습니다.");
-            sqlSession.rollback();
+            if (result > 0) {
+                int totalValue = calculateTotalChipValue(inputKey);
+                System.out.println("칩을 반환했습니다.");
+                sqlSession.commit();
+            } else {
+                System.out.println("칩 반환에 실패했습니다.");
+                sqlSession.rollback();
+            }
         }
-        sqlSession.close();
+    }
+
+    private static int calculateTotalChipValue(Map<String, Object> inputKey) {
+        int num1 = (int) inputKey.get("num1");
+        int num2 = (int) inputKey.get("num2");
+        int num3 = (int) inputKey.get("num3");
+        int num4 = (int) inputKey.get("num4");
+        int num5 = (int) inputKey.get("num5");
+
+        // 각 칩의 가치에 맞게 더해서 총 가치 계산
+        return num1 + num2 * 5 + num3 * 10 + num4 * 50 + num5 * 100;
     }
 }
