@@ -25,8 +25,7 @@ values('aaa','aaa','호랑이', '1111111', 'n1'),
       ('ccc','ccc','토끼', '33333333', 'n1'),
       ('ddd','ddd','악어', '4444444','v1'),
       ('ggg','ggg','독수리', '5555555','v1'),
-      ('hhh','hhh', '코끼리','66666666', 'v2'),
-      ('admin','admin','관리자', null, 'ma');
+      ('hhh','hhh', '코끼리','66666666', 'v2');
 select * from customer;
 
 insert into log(log_date, log_money, log_kind_money, log_activiy,  log_customer_id)
