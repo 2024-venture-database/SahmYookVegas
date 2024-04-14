@@ -18,21 +18,27 @@ public class Main {
             System.out.println("2. 회원가입");
             System.out.println("9. 종료");
             System.out.print("메뉴를 선택하세요: ");
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // 버퍼 비우기
+            String input = scanner.nextLine();
 
-            switch (choice) {
-                case 1:
-                    login(scanner, customerMapper);
-                    break;
-                case 2:
-                    signUp(scanner, customerMapper);
-                    break;
-                case 9:
-                    System.out.println("프로그램을 종료합니다.");
-                    System.exit(0);
-                default:
-                    System.out.println("올바른 메뉴를 선택하세요.");
+            // 입력값이 숫자인지 확인
+            if (input.matches("\\d+")) {
+                int choice = Integer.parseInt(input);
+                switch (choice) {
+                    case 1:
+                        login(scanner, customerMapper);
+                        break;
+                    case 2:
+                        signUp(scanner, customerMapper);
+                        break;
+                    case 9:
+                        System.out.println("프로그램을 종료합니다.");
+                        System.exit(0);
+                    default:
+                        System.out.println("올바른 메뉴를 선택하세요.");
+                        break;
+                }
+            } else {
+                System.out.println("숫자를 입력하세요.");
             }
         }
     }
