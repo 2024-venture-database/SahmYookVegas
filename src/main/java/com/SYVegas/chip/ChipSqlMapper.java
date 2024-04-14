@@ -16,4 +16,6 @@ public interface ChipSqlMapper {
     void exchangeChips(Map<String, Object> walletUpdateParams);
 
     void returnChips(Map<String, Object> walletUpdateParams);
+
+    int getWalletAmount(Map<String, Object> chipExchangeReturn);
 }
