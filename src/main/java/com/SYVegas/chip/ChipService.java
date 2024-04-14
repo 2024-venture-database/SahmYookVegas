@@ -10,15 +10,13 @@ import static com.SYVegas.common.Template.getSqlSession;
 
 public class ChipService {
 
-    private static Object value;
-
-    public static Map<String,Object> chipExchangeReturn(Map<String, Integer> chipCounts){
+    public static Map<String, Object> chipExchangeReturn(Map<String, Integer> chipCounts) {
 
         Scanner sc = new Scanner(System.in);
 
         System.out.print("칩 교환/반환 서비스를 시작하겠습니다.");
         System.out.println("사용자 ID를 입력하세요: ");
-        String id=sc.nextLine();
+        String id = sc.nextLine();
 
         System.out.println("(1.교환, 2.반환)");
         System.out.println("원하는 작업을 선택하세요: ");
@@ -42,27 +40,54 @@ public class ChipService {
         }
 
         Map<String, Object> chipExchangeReturn = new HashMap<>();
-        chipExchangeReturn.put("id",id);
-        chipExchangeReturn.put("attribute",attribute);
+        chipExchangeReturn.put("id", id);
+        chipExchangeReturn.put("attribute", attribute);
+        chipExchangeReturn.put("chipCounts", chipCounts);
 
         return chipExchangeReturn;
     }
 
-    public void updateChipDTO(Map<String, Object> chipExchangeReturn){
-        SqlSession sqlSession = getSqlSession();
-        ChipSqlMapper mapper = sqlSession.getMapper(ChipSqlMapper.class);
+    public void updateChipDTO(Map<String, Object> chipExchangeReturn) {
+        // 가상의 지갑 객체 생성
+        WalletDTO wallet = new WalletDTO();
 
-        int result = mapper.updateChipTransaction(chipExchangeReturn);
+        int attribute = (int) chipExchangeReturn.get("attribute");
+        Map<String, Integer> chipCounts = (Map<String, Integer>) chipExchangeReturn.get("chipCounts");
 
-        if (result > 0) {
-            System.out.println("칩 거래 내역이 성공적으로 업데이트되었습니다.");
-            sqlSession.commit();
-        } else {
-            System.out.println("칩 거래 내역을 업데이트하는 데 실패했습니다.");
-            sqlSession.rollback();
+        // 교환 작업
+        if (attribute == 1) {
+            // 교환한 칩의 총 가치 계산
+            int totalChipValue = chipCounts.get("1칩") * 10000 +
+                    chipCounts.get("5칩") * 50000 +
+                    chipCounts.get("10칩") * 100000 +
+                    chipCounts.get("50칩") * 500000 +
+                    chipCounts.get("100칩") * 1000000;
+            // 지갑에서 돈을 교환한 칩의 총 가치만큼 빼기
+            wallet.setAmount(wallet.getAmount() - totalChipValue);
+        }
+        // 반환 작업
+        else if (attribute == 2) {
+            // 칩을 돈으로 환산하여 총 가치 계산
+            int totalMoneyValue = chipCounts.get("1칩") * 10000 +
+                    chipCounts.get("5칩") * 50000 +
+                    chipCounts.get("10칩") * 100000 +
+                    chipCounts.get("50칩") * 500000 +
+                    chipCounts.get("100칩") * 1000000;
+            // 지갑에 돈을 추가하기
+            wallet.setAmount(wallet.getAmount() + totalMoneyValue);
         }
 
-        sqlSession.close();
-
+        // 지갑 정보 출력
+        System.out.println(wallet.toString());
     }
 }
+
+/* 지갑에 있는 돈을 칩으로 교환을 하고
+* 칩으로 교환한 액수만큼 지갑에서 돈을 빼는 것
+* 칩에 있는 숫자 1당 만원의 가치를 가짐
+* 만약 100만원짜리 칩 5개를 교환 받으면
+* 지갑에서 500만원이 빠지는 걸 업데이트 하는 기능
+* 반환하면 내가 가진 칩을 다 돈으로 환산해서
+* 지갑 액수에 추가해주는 업데이트
+* 부가적으로 칩을 교환했을 때 돈을 얼만큼 교환했는지
+* 로그 테이블에 인서트 해줘라 */

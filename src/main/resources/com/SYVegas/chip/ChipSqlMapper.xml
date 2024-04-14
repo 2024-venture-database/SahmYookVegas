@@ -4,28 +4,23 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.SYVegas.chip.ChipSqlMapper">
 
-    <resultMap id="logResultMap" type="LogDTO">
-        <id property="log_code" column="log_code"/>
-        <result property="log_date" column="log_date"/>
-        <result property="log_money" column="log_money"/>
-        <result property="log_kind_money" column="log_kind_money"/>
-        <result property="log_activity" column="log_activiy"/>
-        <result property="log_customer_id" column="log_customer_id"/>
+    <resultMap id="walletResultMap" type="com.SYVegas.chip.WalletDTO">
+        <id property="userId" column="user_id"/>
+        <result property="amount" column="amount"/>
     </resultMap>
 
-    <select id="selectAllLogs" resultMap="logResultMap">
-        SELECT * FROM log;
-    </select>
+    <!-- 칩 교환 -->
+    <update id="exchangeChips" parameterType="hashMap">
+        UPDATE wallet
+        SET amount = amount - #{exchangeAmount}
+        WHERE userId = #{userId};
+    </update>
 
-
-    <update id="updateChipTransaction" parameterType="hashMap">
-        UPDATE log
-           SET log_date = #{log_date},
-               log_money = #{log_money},
-               log_kind_money = #{log_kind_money},
-               log_activiy = #{log_activiy},
-               log_customer_id = #{log_customer_id}
-         WHERE log_code = #{log_code};
+    <!-- 칩 반환 -->
+    <update id="returnChips" parameterType="hashMap">
+        UPDATE wallet
+        SET amount = amount + #{returnAmount}
+        WHERE userId = #{userId};
     </update>
 
 </mapper>
