@@ -10,6 +10,10 @@ public class ChipService {
 
     private final Map<String, Integer> walletMap = new HashMap<>();
 
+    public void setWalletAmount(String userId, int amount) {
+        walletMap.put(userId, amount);
+    }
+
     public Map<String, Object> chipExchangeReturn(Map<String, Integer> chipCounts) {
         Scanner sc = new Scanner(System.in);
 
@@ -82,6 +86,7 @@ public class ChipService {
         // 지갑 정보 출력
         System.out.println("지갑 정보: " + walletMap.get(id));
     }
+
 }
 
 /* 지갑에 있는 돈을 칩으로 교환을 하고
