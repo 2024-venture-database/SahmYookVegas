@@ -60,7 +60,7 @@ public class ChipService {
             int result = mapper.updateChipDTO(inputKey);
 
             if (result > 0) {
-                int totalValue = calculateTotalChipValue(inputKey);
+                int totalValue2 = calculateTotalChipValue(inputKey);
                 System.out.println("칩을 반환했습니다.");
                 sqlSession.commit();
             } else {
@@ -78,6 +78,6 @@ public class ChipService {
         int num5 = (int) inputKey.get("num5");
 
         // 각 칩의 가치에 맞게 더해서 총 가치 계산
-        return num1 + num2 * 5 + num3 * 10 + num4 * 50 + num5 * 100;
+        return num1 * 10000 + num2 * 50000 + num3 * 100000 + num4 * 500000 + num5 * 1000000;
     }
 }

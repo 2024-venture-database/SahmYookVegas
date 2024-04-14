@@ -4,22 +4,45 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.SYVegas.chip.ChipSqlMapper">
 
+    <resultMap id="logResultMap" type="com.SYVegas.chip.Log">
+        <id property="logCode" column="log_code"/>
+        <result property="logDate" column="log_date"/>
+        <result property="logMoney" column="log_money"/>
+        <result property="logKindMoney" column="log_kind_money"/>
+        <result property="logActivity" column="log_activiy"/>
+        <result property="logCustomerId" column="log_customer_id"/>
+    </resultMap>
+
+    <!-- 칩 교환 -->
+    <select id="getChipExchange" parameterType="string" resultMap="logResultMap">
+        SELECT *
+        FROM log
+        WHERE log_activiy = 'chip_exchange' AND log_customer_id = #{customerId}
+    </select>
+
+    <!-- 칩 반환 -->
+    <select id="getChipReturn" parameterType="string" resultMap="logResultMap">
+        SELECT *
+        FROM log
+        WHERE log_activiy = 'chip_return' AND log_customer_id = #{customerId}
+    </select>
+
     <update id="updateChipDTO" parameterType="map">
-        update log
-        <set>
-            log_date = curdate(),
-            <if test="attribute == 1">
-                log_money = #{exchangeMoney},
-                log_kind_money = '지갑',
-                log_activiy = '칩교환'
-            </if>
-            <if test="attribute == 2">
-                log_money = #{returnMoney},
-                log_kind_money = '지갑',
-                log_activiy = '칩반환'
-            </if>
-        </set>
-        where log_customer_id = #{log_customer_id}
+        UPDATE log
+        SET
+        log_date = curdate(),
+        <if test="attribute == 1">
+            log_money = #{totalValue},
+            log_kind_money = '지갑',
+            log_activiy = '칩교환'
+        </if>
+
+        <if test="attribute == 2">
+            log_money = #{totalValue2},
+            log_kind_money = '지갑',
+            log_activiy = '칩반환'
+        </if>
+        WHERE log_customer_id = #{log_customer_id}
     </update>
 
 </mapper>
