@@ -82,6 +82,17 @@ public class Main {
     private static void signUp(Scanner scanner, CustomerMapper customerMapper) {
         System.out.print("아이디를 입력하세요: ");
         String id = scanner.nextLine();
+
+        // 입력한 ID가 이미 존재하는지 확인
+        Customer existingCustomer = customerMapper.getCustomerById(id);
+
+        // 만약 이미 존재하는 ID라면 사용자에게 알림을 출력하고 다시 입력하도록 유도
+        if (existingCustomer != null) {
+            System.out.println("이미 사용 중인 아이디입니다. 새로운 아이디를 입력해 주세요.");
+            signUp(scanner, customerMapper); // 다시 회원가입 메소드 호출하여 재입력 요구
+            return; // 재귀 호출 이후에는 메소드 종료
+        }
+
         System.out.print("비밀번호를 입력하세요: ");
         String pw = scanner.nextLine();
         System.out.print("이름을 입력하세요: ");

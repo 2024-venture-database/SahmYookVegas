@@ -6,5 +6,5 @@ public interface CustomerMapper {
 
     void insertCustomer(Customer customer);
     Customer getCustomerByIdAndPassword(Map<String, String> credentials);
-
+    Customer getCustomerById(String customerId);
 }

@@ -14,4 +14,12 @@
         SELECT *, customer_rank as customerRank FROM customer
         WHERE customer_id = #{customerId} AND customer_password = #{customerPw}
     </select>
+
+    <!-- 회원 가입 시 아이디 중복 방지를 위한 SELECT 쿼리 -->
+    <select id="getCustomerById" parameterType="java.lang.String" resultType="com.SYVegas.member.Customer">
+        SELECT *
+        FROM customer
+        WHERE customer_id = #{customerId}
+    </select>
+
 </mapper>
