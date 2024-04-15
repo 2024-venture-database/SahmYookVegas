@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.SYVegas.chip.ChipSqlMapper">
+
+    <resultMap id="walletResultMap" type="com.SYVegas.chip.WalletDTO">
+        <id property="userId" column="user_id"/>
+        <result property="amount" column="amount"/>
+    </resultMap>
+
+    <!-- 칩 교환 -->
+    <update id="exchangeChips" parameterType="hashMap">
+        UPDATE wallet
+        SET amount = amount - #{exchangeAmount}
+        WHERE userId = #{userId};
+    </update>
+
+    <!-- 칩 반환 -->
+    <update id="returnChips" parameterType="hashMap">
+        UPDATE wallet
+        SET amount = amount + #{returnAmount}
+        WHERE userId = #{userId};
+    </update>
+
+</mapper>
