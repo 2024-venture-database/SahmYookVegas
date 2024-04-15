@@ -12,10 +12,14 @@ public interface ChipSqlMapper {
     List<Log> selectAllLogs();
 
     void updateWallet(Map<String, Object> walletUpdateParams);
+    
 
-    void exchangeChips(Map<String, Object> walletUpdateParams);
-
-    void returnChips(Map<String, Object> walletUpdateParams);
+    int returnChips(Map<String, Object> walletUpdateParams);
 
     int getWalletAmount(Map<String, Object> chipExchangeReturn);
+
+    int getBalance(String id);
+
+
+    int exchangeChips(Map<String, Object> chipExchange);
 }

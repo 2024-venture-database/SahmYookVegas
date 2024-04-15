@@ -1,12 +1,13 @@
 package com.SYVegas.chip;
 
-import java.util.HashMap;
+import com.SYVegas.common.CurrentUser;
+
 import java.util.Map;
 import java.util.Scanner;
 
-public class Prototype {
+public class ChipPrototype {
 
-    public static void main(String[] args) {
+    public void chipStart(CurrentUser currentUser) {
 
         ChipService chipService = new ChipService();
         Scanner scanner = new Scanner(System.in);
@@ -17,13 +18,13 @@ public class Prototype {
 
         Map<String, Integer> chipCounts = null;
 
-        Map<String, Object> chipExchangeReturn = chipService.chipExchangeReturn(chipCounts);
+        Map<String, Object> chipExchangeReturn = chipService.chipExchangeReturn(currentUser, chipCounts);
 
         System.out.println("사용자 ID: " + chipExchangeReturn.get("id"));
         int attribute = (int) chipExchangeReturn.get("attribute");
         System.out.println("작업 선택: " + (attribute == 1 ? "교환" : "반환"));
 
-        chipService.updateChipDTO(chipExchangeReturn);
+        chipService.updateChipDTO(currentUser,chipExchangeReturn);
 
         System.out.println("프로그램을 종료합니다.");
     }

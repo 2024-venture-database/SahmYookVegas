@@ -9,18 +9,24 @@
         <result property="amount" column="amount"/>
     </resultMap>
 
+    <select id="getBalance" resultType="int">
+        select customer_balance
+        from customer
+        where customer_id =#{id}
+    </select>
+
     <!-- 칩 교환 -->
     <update id="exchangeChips" parameterType="hashMap">
-        UPDATE wallet
-        SET amount = amount - #{exchangeAmount}
-        WHERE userId = #{userId};
+        UPDATE customer
+        SET customer_balance = #{exchangeAmount}
+        WHERE customer_id = #{id}
     </update>
 
     <!-- 칩 반환 -->
     <update id="returnChips" parameterType="hashMap">
-        UPDATE wallet
-        SET amount = amount + #{returnAmount}
-        WHERE userId = #{userId};
+        UPDATE customer
+        SET customer_balance =#{exchangeAmount}
+        WHERE customer_id = #{id}
     </update>
 
 </mapper>
