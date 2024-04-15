@@ -17,7 +17,7 @@ public interface SYUVegasMapper {
 
     //지갑 충전
 
-    int updateCustomerWallet(Map<String, Object> parameters);
+    void updateCustomerWallet(Map<String, Object> parameters);
 
     int getCustomerBalance(String customerId);
 

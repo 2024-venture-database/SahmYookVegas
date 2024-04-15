@@ -18,15 +18,15 @@
     <!-- 칩 교환 -->
     <update id="exchangeChips" parameterType="hashMap">
         UPDATE customer
-        SET customer_balance = customer_balance - #{exchangeAmount}
-        WHERE customer_id = #{userId};
+        SET customer_balance = #{exchangeAmount}
+        WHERE customer_id = #{id}
     </update>
 
     <!-- 칩 반환 -->
     <update id="returnChips" parameterType="hashMap">
         UPDATE customer
-        SET customer_balance = customer_balance + #{exchangeAmount}
-        WHERE customer_id = #{userId};
+        SET customer_balance =#{exchangeAmount}
+        WHERE customer_id = #{id}
     </update>
 
 </mapper>
