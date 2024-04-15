@@ -1,3 +1,5 @@
+<img src="https://github.com/venture-project-database/SahmYookVegas/assets/144655675/6696f76e-64e1-409c-8646-e9aefaa65a82" height=200 width=1200>
+
 <div align = "center">
 <h1> 💸 SAHMYOOK VEGAS 💸 </h1>
 </div>
