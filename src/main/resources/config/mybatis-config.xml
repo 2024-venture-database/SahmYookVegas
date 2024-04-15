@@ -27,6 +27,7 @@
         <mapper resource="com/SYVegas/customerMyInfo/CustomerMyInfoMapper.xml"/>
         <mapper resource="com/SYVegas/member/CustomerMapper.xml"/>
         <mapper resource="com/SYVegas/playgame/GameMapper.xml"/>
+        <mapper resource="com/SYVegas/chip/ChipSqlMapper.xml"/>
     </mappers>
 
 </configuration>

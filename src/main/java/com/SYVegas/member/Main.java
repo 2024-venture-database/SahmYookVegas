@@ -1,6 +1,7 @@
 package com.SYVegas.member;
 
 import com.SYVegas.check_customerInfoAndLog.Prototype;
+import com.SYVegas.chip.ChipPrototype;
 import com.SYVegas.common.CurrentUser;
 import com.SYVegas.common.DepositAndPurchase.DepositManager;
 import com.SYVegas.common.DepositAndPurchase.ProductPurchase;
@@ -96,16 +97,15 @@ public class Main {
     }
 
     private static void printMainMenu(Scanner scanner, CustomerMapper customerMapper) {
-        CurrentUser currentUser=new CurrentUser(mainId,50,50,50,50,50);
+        CurrentUser currentUser=new CurrentUser(mainId,0,0,0,0,0);
         while (true) {
             System.out.println();
             System.out.println("======================이용자 메뉴======================");
             System.out.println("1. 내 정보 조회");
             System.out.println("2. 충전");
-            System.out.println("3. 칩 교환");
-            System.out.println("4. 칩 반환");
-            System.out.println("5. 상품 구매");
-            System.out.println("6. 게임 시작");
+            System.out.println("3. 칩 교환, 반환");
+            System.out.println("4. 상품 구매");
+            System.out.println("5. 게임 시작");
             System.out.println("9. 로그아웃");
             System.out.print("메뉴를 선택하세요: ");
             String input = scanner.nextLine();
@@ -127,20 +127,20 @@ public class Main {
                         depositManager.depositMoney(currentUser);
                         break;
                     case 3:
+                        ChipPrototype chipPrototype= new ChipPrototype();
+                        chipPrototype.chipStart(currentUser);
                         // 칩 교환 메소드 실행
                         // 이 부분은 칩 교환에 해당하는 메소드 호출로 대체되어야 합니다.
-                        break;
-                    case 4:
                         // 칩 반환 메소드 실행
                         // 이 부분은 칩 반환에 해당하는 메소드 호출로 대체되어야 합니다.
                         break;
-                    case 5:
+                    case 4:
                         // 상품 구매 메소드 실행
                         // 이 부분은 상품 구매에 해당하는 메소드 호출로 대체되어야 합니다.
                         ProductPurchase productPurchase=new ProductPurchase();
                         productPurchase.productPaymentType(currentUser);
                         break;
-                    case 6:
+                    case 5:
                         // 게임 시작 메소드 실행
                         // 이 부분은 게임 시작에 해당하는 메소드 호출로 대체되어야 합니다.
                         PlayGame playGame=new PlayGame();

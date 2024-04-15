@@ -51,6 +51,7 @@ public class PlayGame {
         mapper = sqlSession.getMapper(GameMapper.class);
 
         gameRate= mapper.getGameRate(gameNum);
+        sqlSession.close();
         return gameRate;
     }
 

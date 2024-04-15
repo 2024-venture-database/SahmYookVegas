@@ -18,4 +18,8 @@ public interface ChipSqlMapper {
     void returnChips(Map<String, Object> walletUpdateParams);
 
     int getWalletAmount(Map<String, Object> chipExchangeReturn);
+
+    int getBalance(String id);
+
+    void setBalance(int balance);
 }
