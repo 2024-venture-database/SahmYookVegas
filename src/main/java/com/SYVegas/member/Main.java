@@ -17,6 +17,9 @@ public class Main {
     // 나중에 메소드화 할예정
     public static void runMenu(Scanner scanner, CustomerMapper customerMapper) {
         while (true) {
+            System.out.println();
+            System.out.println("삼육베가스 프로그램");
+            System.out.println("==================================================");
             System.out.println("1. 로그인");
             System.out.println("2. 회원가입");
             System.out.println("9. 종료");
@@ -59,6 +62,7 @@ public class Main {
 
         Customer customer = customerMapper.getCustomerByIdAndPassword(credentials);
         if (customer != null) {
+            System.out.println("==================================================");
             System.out.println("로그인 성공! 환영합니다, " + customer.getCustomerName() + "님");
             System.out.println("등급: " + customer.getCustomerRank());
             // 로그인 성공 시 메인 메뉴 호출
@@ -94,13 +98,15 @@ public class Main {
     private static void printMainMenu(Scanner scanner, CustomerMapper customerMapper) {
         CurrentUser currentUser=new CurrentUser(mainId,50,50,50,50,50);
         while (true) {
+            System.out.println();
+            System.out.println("======================이용자 메뉴======================");
             System.out.println("1. 내 정보 조회");
             System.out.println("2. 충전");
             System.out.println("3. 칩 교환");
             System.out.println("4. 칩 반환");
             System.out.println("5. 상품 구매");
             System.out.println("6. 게임 시작");
-            System.out.println("7. 로그아웃");
+            System.out.println("9. 로그아웃");
             System.out.print("메뉴를 선택하세요: ");
             String input = scanner.nextLine();
 
@@ -140,7 +146,7 @@ public class Main {
                         PlayGame playGame=new PlayGame();
                         playGame.gamePlay(currentUser);
                         break;
-                    case 7:
+                    case 9:
                         System.out.println("로그아웃합니다.");
                         return; // 메소드 종료 및 프로그램 종료
                     default:

@@ -15,6 +15,8 @@ public class ProductPurchase {
 
         String customerId = currentUser.getCurrentUserId();
 
+        System.out.println();
+        System.out.println("카지노 내 상품을 구매합니다.");
         System.out.println("========\uD83E\uDE99\uD83E\uDE99\uD83E\uDE99========");
         System.out.println("[1] 지갑 | [2] 크레딧");
         System.out.println("=======================");

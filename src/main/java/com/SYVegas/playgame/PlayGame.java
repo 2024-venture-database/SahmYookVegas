@@ -88,11 +88,25 @@ public class PlayGame {
             betting(currentUser);
             System.out.println();
             System.out.println("룰렛 돌아가는 중.....");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println();
             System.out.println("룰렛이 멈췄다!");
             System.out.println();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println("룰렛이 가리키는 숫자는 "+resultNum+" 입니다.!!");
-            System.out.println();
+            System.out.println();try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             gameResult(currentUser);
             System.out.println();
             System.out.print("게임을 계속 하시겠습니까?(Y or N) :");
@@ -141,10 +155,25 @@ public class PlayGame {
             betting(currentUser);
             System.out.println();
             System.out.println("룰렛 돌아가는 중.....");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println();
             System.out.println("룰렛이 멈췄다!");
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println();
             System.out.println("룰렛이 가리키는 숫자는 "+resultNum+" 입니다.!!");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.println();
             gameResult(currentUser);
             System.out.println();

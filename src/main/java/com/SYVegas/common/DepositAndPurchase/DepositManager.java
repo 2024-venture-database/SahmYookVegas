@@ -21,6 +21,8 @@ public class DepositManager {
 
         int depositAmount;
         do{
+            System.out.println();
+            System.out.println("지갑에 금액을 충전합니다.");
             System.out.println( customerId+" 이용객님");
             System.out.println("=======================");
             System.out.println("충전할 금액을 입력하세요");
