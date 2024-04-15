@@ -1,6 +1,8 @@
 package com.SYVegas.common.DepositAndPurchase;
 
 import org.apache.ibatis.session.SqlSession;
+
+import java.time.LocalDate;
 import java.util.*;
 import static com.SYVegas.common.Template.getSqlSession;
 
@@ -109,7 +111,7 @@ public class productPurchase {
                 System.out.println("==================================================");
                 System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
                 System.out.println("==================================================");
-                //saveLog(totalPrice);
+                saveLog(totalPrice, customerId);
                 System.out.println(product.getName() + "를 구매완료했습니다.");
                 sqlSession.commit();
             }
@@ -140,7 +142,7 @@ public class productPurchase {
                 System.out.println("==================================================");
                 System.out.println(product.getName() + "를 구매완료했습니다.");
                 sqlSession.commit();
-                // saveLog(totalPrice);
+                saveLog(totalPrice, customerId);
             }
 
         } else {
@@ -149,25 +151,23 @@ public class productPurchase {
         }
 
         sqlSession.close();
-
-
     }
 
-    /*
-   public void saveLog(int totalPrice) {
-        SqlSession sqlSession = getSqlSession();
-        mapper = sqlSession.getMapper(SYUVegasMapper.class);
+   public void saveLog(int totalPrice, String customerId) {
+       SqlSession sqlSession = getSqlSession();
+       mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
-        Map<String, Object> parameters = new HashMap<>();
-        parameters.put("logDate", LocalDate.now());
-        parameters.put("logMoney", totalPrice);
-        parameters.put("logActivity", "상품구매");
+       Map<String, Object> parameters = new HashMap<>();
+       parameters.put("logDate", LocalDate.now());
+       parameters.put("logMoney", totalPrice);
+       parameters.put("logKindMoney", "지갑");
+       parameters.put("logActiviy", "상품구매");
+       parameters.put("logCustomerId", customerId);
 
-        mapper.insertPurchaseLog(parameters);
+       mapper.insertPurchaseLog(parameters);
 
-        sqlSession.commit();
-        sqlSession.close();
-
-    }*/
+       sqlSession.commit();
+       sqlSession.close();
+   }
 
 }

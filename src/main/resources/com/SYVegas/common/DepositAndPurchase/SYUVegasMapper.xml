@@ -39,9 +39,25 @@
         WHERE customer_id = #{customerId}
     </update>
 
-    <update id="updateProductQuantity">
-        UPDATE product SET product_quantity = product_quantity - #{quantity} WHERE product_id = #{productId}
-    </update>
+    <insert id="insertMoneyExchangeLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy, log_customer_id)
+        VALUES (curdate(), #{logMoney}, '지갑', '충전', #{customerId})
+    </insert>
+
+    <insert id="insertPurchaseLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy, log_customer_id)
+        VALUES (curdate(), #{logMoney}, '지갑', '상품 구매', #{customerId})
+    </insert>
+
+    <insert id="insertChipExchangeLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy, log_customer_id)
+        VALUES (#{curdate}, #{logMoney}, '칩', '칩 교환', #{CustomerId})
+    </insert>
+
+    <insert id="insertChipReturnLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy, log_customer_id)
+        VALUES (#{curdate}, #{logMoney}, '칩', '칩 반환', #{CustomerId})
+    </insert>
 
     <!-- 돈 충전 -->
 

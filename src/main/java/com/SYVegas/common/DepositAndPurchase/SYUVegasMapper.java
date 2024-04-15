@@ -15,6 +15,7 @@ public interface SYUVegasMapper {
 
     void insertPurchaseLog(Map<String, Object> parameters);
 
+
     //지갑 충전
 
     void updateCustomerWallet(Map<String, Object> parameters);
@@ -25,5 +26,5 @@ public interface SYUVegasMapper {
 
     int getCustomerCredit(String customerId);
 
-
+    void insertMoneyExchangeLog(Map<String, Object> parameters);
 }
