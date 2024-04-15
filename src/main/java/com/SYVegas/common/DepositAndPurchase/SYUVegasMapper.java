@@ -26,4 +26,5 @@ public interface SYUVegasMapper {
     int getCustomerCredit(String customerId);
 
 
+    void insertMoneyExchangeLog(Map<String, Object> parameters);
 }

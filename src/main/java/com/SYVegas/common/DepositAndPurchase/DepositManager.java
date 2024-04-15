@@ -2,6 +2,8 @@ package com.SYVegas.common.DepositAndPurchase;
 
 import com.SYVegas.common.CurrentUser;
 import org.apache.ibatis.session.SqlSession;
+
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -56,6 +58,24 @@ public class DepositManager {
         System.out.println("-------------------------------------------");
         System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
         System.out.println("============================================");
+
+        saveLog(depositAmount, customerId);
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    public static void saveLog(int depositAmount, String customerId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(SYUVegasMapper.class);
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("logDate", LocalDate.now());
+        parameters.put("logMoney", depositAmount);
+        parameters.put("logKindMoney", "지갑");
+        parameters.put("logActiviy", "상품구매");
+        parameters.put("logCustomerId", customerId);
+
+        mapper.insertMoneyExchangeLog(parameters);
 
         sqlSession.commit();
         sqlSession.close();

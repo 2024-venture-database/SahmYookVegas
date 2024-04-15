@@ -4,6 +4,7 @@ import com.SYVegas.common.CurrentUser;
 import com.SYVegas.playgame.GameMapper;
 import org.apache.ibatis.session.SqlSession;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -146,7 +147,7 @@ public class ChipService {
             currentUser.setChip50(currentUser.getChip50()+chipCounts.get("50칩"));
             currentUser.setChip100(currentUser.getChip100()+chipCounts.get("100칩"));
 
-            System.out.println(currentAmount);
+
             System.out.println("=========현재 "+id+"님의 보유 칩========= ");
             System.out.println("[칩1]: "+currentUser.getChip1());
             System.out.println("[칩5]: "+currentUser.getChip5());
@@ -164,6 +165,7 @@ public class ChipService {
 
             exchangeChips(chipExchange);
             System.out.println(id+"님의 현재 잔액은 "+getBalance(id)+"원 입니다.");
+            saveLog1(totalChipValue, currentUser.getCurrentUserId());
 
         } else if (attribute == 2) { // 반환이면
 
@@ -173,7 +175,7 @@ public class ChipService {
             currentUser.setChip50(currentUser.getChip50()-chipCounts.get("50칩"));
             currentUser.setChip100(currentUser.getChip100()-chipCounts.get("100칩"));
 
-            System.out.println(currentAmount);
+
             System.out.println("=========현재 "+id+"님의 보유 칩========= ");
             System.out.println("[칩1]: "+currentUser.getChip1());
             System.out.println("[칩5]: "+currentUser.getChip5());
@@ -196,11 +198,46 @@ public class ChipService {
             chipExchange.put("id",currentUser.getCurrentUserId());
             returnChips(chipExchange);
             System.out.println(id+"님의 현재 잔액은 "+getBalance(id)+"원 입니다.");
+            saveLog2(totalChipValue, currentUser.getCurrentUserId());
+
 
         }
 
 
         // 지갑 정보 출력
+    }
+    public void saveLog1(int totalPrice, String customerId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(ChipSqlMapper.class);
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("logDate", LocalDate.now());
+        parameters.put("logMoney", totalPrice);
+        parameters.put("logKindMoney", "지갑");
+        parameters.put("logActiviy", "칩교환");
+        parameters.put("logCustomerId", customerId);
+
+        mapper.insertChipExchangeLog(parameters);
+
+        sqlSession.commit();
+        sqlSession.close();
+    }
+
+    public void saveLog2(int totalPrice, String customerId) {
+        SqlSession sqlSession = getSqlSession();
+        mapper = sqlSession.getMapper(ChipSqlMapper.class);
+
+        Map<String, Object> parameters = new HashMap<>();
+        parameters.put("logDate", LocalDate.now());
+        parameters.put("logMoney", totalPrice);
+        parameters.put("logKindMoney", "지갑");
+        parameters.put("logActiviy", "칩반환");
+        parameters.put("logCustomerId", customerId);
+
+        mapper.insertChipReturnLog(parameters);
+
+        sqlSession.commit();
+        sqlSession.close();
     }
 
 }

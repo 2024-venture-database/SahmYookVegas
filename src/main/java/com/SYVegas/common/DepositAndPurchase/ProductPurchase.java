@@ -2,6 +2,8 @@ package com.SYVegas.common.DepositAndPurchase;
 
 import com.SYVegas.common.CurrentUser;
 import org.apache.ibatis.session.SqlSession;
+
+import java.time.LocalDate;
 import java.util.*;
 import static com.SYVegas.common.Template.getSqlSession;
 
@@ -16,18 +18,21 @@ public class ProductPurchase {
         String customerId = currentUser.getCurrentUserId();
 
         System.out.println();
-        System.out.println("카지노 내 상품을 구매합니다.");
+        System.out.print(customerId+"이용객님");
+
+
+
         System.out.println("========\uD83E\uDE99\uD83E\uDE99\uD83E\uDE99========");
         System.out.println("[1] 지갑 | [2] 크레딧");
         System.out.println("=======================");
         System.out.print("지불 방식을 선택하세요 : ");
 
         int payment = sc.nextInt();
-        selectproductType(payment, customerId);
+        selectproductType(currentUser,payment, customerId);
     }
 
     // 구매할 상품 선택
-    public void selectproductType(int payment, String customerId) {
+    public void selectproductType(CurrentUser currentUser,int payment, String customerId) {
 
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
@@ -54,21 +59,22 @@ public class ProductPurchase {
 
             if (choice > 0 && choice <= productList.size()) {
                 ProductDTO selectedProduct = productList.get(choice - 1);
-                purchaseProduct(selectedProduct, payment, customerId);
+                purchaseProduct(currentUser, selectedProduct, payment, customerId);
             } else{
                 System.out.println("==================================================");
                 System.out.println("잘못된 선택입니다.");
-                selectproductType(payment, customerId);
+                selectproductType(currentUser,payment, customerId);
             }
         } else {
             System.out.println("==================================================");
             System.out.println("해당하는 상품이 없습니다.");
-            selectproductType(payment, customerId);
+            selectproductType(currentUser,payment, customerId);
         }
     }
 
     // 상품 구매
-    public void purchaseProduct(ProductDTO product, int payment, String customerId) {
+    public void purchaseProduct(CurrentUser currentUser,ProductDTO product, int payment, String customerId) {
+        Scanner sc = new Scanner(System.in);
         int totalPrice = -(product.getPrice());
 
         SqlSession sqlSession = getSqlSession();
@@ -84,24 +90,33 @@ public class ProductPurchase {
         int newBalance = currentBalance + totalPrice;
         int newCreditBalance = currentCredit + totalPrice;
 
-
-
-
         if (payment == 1) {
 
             if (product.getPrice() > currentBalance) {
-                System.out.println("==================================================");// 지갑 잔액 부족
+                System.out.println("==================================================");       // 지갑 잔액 부족
                 System.out.println("잔액이 부족하여 구매할 수 없습니다.");
-                System.out.println("다시 상품을 선택해주세요!");
+                System.out.println("[1] 상품 선택");
+                System.out.println("[2] 뒤로 가기");
                 System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + currentBalance + "원");
-                selectproductType(payment, customerId);
-                return;
-            }   else{
+                int no = sc.nextInt();
+
+                if (no == 1) {
+                    selectproductType(currentUser,payment, customerId);
+                } else if (no == 2) {
+                    productPaymentType(currentUser);
+                } else {
+                    System.out.println("잘못된 선택입니다.");
+                    purchaseProduct(currentUser,product, payment, customerId);
+                }
+
+            }   else    {
                 mapper.updateCustomerBalance(parameters);
                 System.out.println("==================================================");
                 System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
                 System.out.println("==================================================");
-                //saveLog(totalPrice);
+                saveLog(totalPrice, customerId);
+                System.out.println(product.getName() + "를 구매완료했습니다.");
+                sqlSession.commit();
             }
 
         } else if (payment == 2) {
@@ -109,45 +124,53 @@ public class ProductPurchase {
             if (product.getPrice() > currentCredit) {            // 크레딧 잔액 부족
                 System.out.println("==================================================");
                 System.out.println("잔액이 부족하여 구매할 수 없습니다.");
-                System.out.println("다시 상품을 선택해주세요!");
+                System.out.println("[1] 상품 선택");
+                System.out.println("[2] 뒤로 가기");
                 System.out.println("==================================================");
                 System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + currentCredit + "원");
-                selectproductType(payment, customerId);
-                return;
+                int no = sc.nextInt();
+                if (no == 1) {
+                    selectproductType(currentUser,payment, customerId);
+                } else if (no == 2) {
+                    productPaymentType(currentUser);
+                } else {
+                    System.out.println("잘못된 선택입니다.");
+                    purchaseProduct(currentUser, product, payment, customerId);
+                }
 
             } else{
                 mapper.updateCreditBalance(parameters);
                 System.out.println("==================================================");
                 System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
                 System.out.println("==================================================");
-                // saveLog(totalPrice);
+                System.out.println(product.getName() + "를 구매완료했습니다.");
+                sqlSession.commit();
+                saveLog(totalPrice, customerId);
             }
 
         } else {
             System.out.println("잘못된 선택입니다.");
             return;
         }
-        sqlSession.commit();
-        sqlSession.close();
 
-        System.out.println(product.getName() + "를 구매완료했습니다.");
+        sqlSession.close();
     }
 
-    /*
-   public void saveLog(int totalPrice) {
+    public void saveLog(int totalPrice, String customerId) {
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("logDate", LocalDate.now());
         parameters.put("logMoney", totalPrice);
-        parameters.put("logActivity", "상품구매");
+        parameters.put("logKindMoney", "지갑");
+        parameters.put("logActiviy", "상품구매");
+        parameters.put("logCustomerId", customerId);
 
         mapper.insertPurchaseLog(parameters);
 
         sqlSession.commit();
         sqlSession.close();
-
-    }*/
+    }
 
 }

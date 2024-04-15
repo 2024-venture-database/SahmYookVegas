@@ -22,4 +22,8 @@ public interface ChipSqlMapper {
 
 
     int exchangeChips(Map<String, Object> chipExchange);
+
+    void insertChipExchangeLog(Map<String, Object> parameters);
+
+    void insertChipReturnLog(Map<String, Object> parameters);
 }

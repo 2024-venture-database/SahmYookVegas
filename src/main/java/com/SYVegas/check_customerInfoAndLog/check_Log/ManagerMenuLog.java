@@ -33,6 +33,7 @@ public class ManagerMenuLog {
         Scanner sc=new Scanner(System.in);
         System.out.print("조회하려는 사용자 ID를 입력하세요 : ");
         String Cname=sc.nextLine();
+        System.out.println();
 
         return Cname;
     }
