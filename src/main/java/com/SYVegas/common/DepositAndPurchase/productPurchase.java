@@ -35,14 +35,14 @@ public class productPurchase {
         sqlSession.close();
 
         if (productList != null && productList.size() > 0) {
-        System.out.println("");
-        System.out.println("================= [ 상품 종류 ] =================");
-        System.out.println("  술   |   음료   |   과자   |   담배   |   교환권  ");
-        System.out.println("================================================");
+            System.out.println("");
+            System.out.println("================= [ 상품 종류 ] =================");
+            System.out.println("  술   |   음료   |   과자   |   담배   |   교환권  ");
+            System.out.println("================================================");
 
             for(int i =0; i < productList.size(); i++){
-            ProductDTO product = productList.get(i);
-            System.out.println((i+1)+ product.toString());
+                ProductDTO product = productList.get(i);
+                System.out.println((i+1)+ product.toString());
             }
 
             System.out.println("==================================================");
@@ -69,6 +69,7 @@ public class productPurchase {
 
     // 상품 구매
     public void purchaseProduct(ProductDTO product, int payment, String customerId) {
+        Scanner sc = new Scanner(System.in);
         int totalPrice = -(product.getPrice());
 
         SqlSession sqlSession = getSqlSession();
@@ -85,41 +86,71 @@ public class productPurchase {
         int newCreditBalance = currentCredit + totalPrice;
 
         if (payment == 1) {
+
             if (product.getPrice() > currentBalance) {
-                System.out.println("==================================================");// 지갑 잔액 부족
+                System.out.println("==================================================");       // 지갑 잔액 부족
                 System.out.println("잔액이 부족하여 구매할 수 없습니다.");
-                System.out.println("다시 상품을 선택해주세요!");
+                System.out.println("[1] 상품 선택");
+                System.out.println("[2] 뒤로 가기");
                 System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + currentBalance + "원");
-                selectproductType(payment, customerId);
-                return;
+                int no = sc.nextInt();
+
+                if (no == 1) {
+                    selectproductType(payment, customerId);
+                } else if (no == 2) {
+                    productPaymentType();
+                } else {
+                    System.out.println("잘못된 선택입니다.");
+                    purchaseProduct(product, payment, customerId);
+                }
+
+            }   else    {
+                mapper.updateCustomerBalance(parameters);
+                System.out.println("==================================================");
+                System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
+                System.out.println("==================================================");
+                //saveLog(totalPrice);
+                System.out.println(product.getName() + "를 구매완료했습니다.");
+                sqlSession.commit();
             }
-            mapper.updateCustomerBalance(parameters);
-            System.out.println("==================================================");
-            System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
-            System.out.println("==================================================");
-            //saveLog(totalPrice);
 
         } else if (payment == 2) {
-             if (product.getPrice() > currentCredit) {            // 크레딧 잔액 부족
+
+            if (product.getPrice() > currentCredit) {            // 크레딧 잔액 부족
                 System.out.println("==================================================");
                 System.out.println("잔액이 부족하여 구매할 수 없습니다.");
-                System.out.println("다시 상품을 선택해주세요!");
+                System.out.println("[1] 상품 선택");
+                System.out.println("[2] 뒤로 가기");
                 System.out.println("==================================================");
                 System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + currentCredit + "원");
-                selectproductType(payment, customerId);
-                return;
+                int no = sc.nextInt();
+                if (no == 1) {
+                    selectproductType(payment, customerId);
+                } else if (no == 2) {
+                    productPaymentType();
+                } else {
+                    System.out.println("잘못된 선택입니다.");
+                    purchaseProduct(product, payment, customerId);
+                }
+
+            } else{
+                mapper.updateCreditBalance(parameters);
+                System.out.println("==================================================");
+                System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
+                System.out.println("==================================================");
+                System.out.println(product.getName() + "를 구매완료했습니다.");
+                sqlSession.commit();
+                // saveLog(totalPrice);
             }
-            mapper.updateCreditBalance(parameters);
-            System.out.println("==================================================");
-            System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
-            System.out.println("==================================================");
-           // saveLog(totalPrice);
+
         } else {
             System.out.println("잘못된 선택입니다.");
             return;
         }
 
-        System.out.println(product.getName() + "를 구매완료했습니다.");
+        sqlSession.close();
+
+
     }
 
     /*

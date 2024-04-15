@@ -45,7 +45,7 @@ public class depositManager {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("depositAmount", depositAmount);
         parameters.put("customerId", customerId);
-        parameters.put("newCreditBalance", newCreditBalance);
+        parameters.put("creditEarned", creditEarned);
         mapper.updateCustomerWallet(parameters);
 
         System.out.println("===========================================");

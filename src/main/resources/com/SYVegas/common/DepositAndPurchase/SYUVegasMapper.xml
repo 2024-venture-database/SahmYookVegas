@@ -23,7 +23,7 @@
 
     <!-- 상품 구매 -->
     <select id="getproductListByType" parameterType="string" resultMap="productResultMap">
-        SELECT product_type, product_name, product_price, product_quantity
+        SELECT product_type, product_name, product_price
         FROM product
     </select>
 
@@ -37,6 +37,10 @@
         UPDATE customer
         SET customer_credit = customer_credit + #{totalPrice}
         WHERE customer_id = #{customerId}
+    </update>
+
+    <update id="updateProductQuantity">
+        UPDATE product SET product_quantity = product_quantity - #{quantity} WHERE product_id = #{productId}
     </update>
 
     <!-- 돈 충전 -->
@@ -56,7 +60,7 @@
     <update id="updateCustomerWallet" parameterType="hashmap">
         UPDATE customer
         SET customer_balance = customer_balance + #{depositAmount},
-            customer_credit = customer_credit + #{newCreditBalance}
+            customer_credit = customer_credit + #{creditEarned}
         WHERE customer_id = #{customerId}
     </update>
 
@@ -72,10 +76,5 @@
         JOIN customer c ON vr.vegas_rank_id = c.customer_rank
         WHERE c.customer_id = #{customerId}
     </select>
-
-    <insert id="insertPurchaseLog" parameterType="map">
-        INSERT INTO log (log_date, log_money, log_activity)
-        VALUES (#{logDate}, #{logMoney} ,#{logActivity})
-    </insert>
 
 </mapper>
