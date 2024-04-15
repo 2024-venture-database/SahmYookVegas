@@ -52,6 +52,7 @@ CREATE TABLE log
 (
     log_code INT NOT NULL AUTO_INCREMENT, -- 로그 코드, 값 입력시 증가
     log_date DATE NOT NULL, -- 현재 날짜 추가
+
     log_money INT NOT NULL, -- 변동된 금액 
     log_kind_money VARCHAR(255), -- 사용 돈의 종류
     log_activiy VARCHAR(255) NOT NULL, -- 금액 변동의 활동 종류 ex)충전, 상품 구매, 칩교환, 반환
@@ -59,6 +60,4 @@ CREATE TABLE log
     PRIMARY KEY (log_code),
     FOREIGN KEY ( log_customer_id) REFERENCES customer(customer_id) ON DELETE CASCADE
 );
-
-
 

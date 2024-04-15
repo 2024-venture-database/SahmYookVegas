@@ -3,7 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
     <properties resource="config/connection-info.properties"/>
+    <typeAliases>
+        <typeAlias alias="CustomerDTO" type="com.SYVegas.customerMyInfo.CustomerDTO"/>
+    </typeAliases>
 
     <environments default="dev">
         <environment id="dev">
@@ -17,6 +21,12 @@
         </environment>
     </environments>
     <mappers>
-        <package name ="com.SYVegas"/>
+        <mapper resource="com/SYVegas/check_customerInfoAndLog/check_customerInfo/ManagerMenuCustomerSqlMapper.xml"/>
+        <mapper resource="com/SYVegas/check_customerInfoAndLog/check_Log/ManagerMenuLogSqlMapper.xml"/>
+        <mapper resource="com/SYVegas/common/DepositAndPurchase/SYUVegasMapper.xml"/>
+        <mapper resource="com/SYVegas/customerMyInfo/CustomerMyInfoMapper.xml"/>
+        <mapper resource="com/SYVegas/member/CustomerMapper.xml"/>
+        <mapper resource="com/SYVegas/playgame/GameMapper.xml"/>
     </mappers>
+
 </configuration>

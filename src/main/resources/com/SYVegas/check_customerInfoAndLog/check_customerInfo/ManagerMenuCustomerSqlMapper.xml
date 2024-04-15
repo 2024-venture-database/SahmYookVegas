@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.SYVegas.check_customerInfoAndLog.check_customerInfo.ManagerMenuCustomerSqlMapper">
+
+    <resultMap id="managerMenuCustomerResultMap" type="com.SYVegas.check_customerInfoAndLog.check_customerInfo.CustomerInfo">
+        <id property="id" column="customer_id"/>
+        <result property="name" column="customer_name"/>
+        <result property="password" column="customer_password"/>
+        <result property="phone" column="customer_phone"/>
+        <result property="balance" column="customer_balance"/>
+        <result property="credit" column="customer_credit"/>
+        <result property="rank" column="vegas_rank_name"/>
+    </resultMap>
+
+    <select id="selectAllManagerMenuCustomerInfo" resultMap="managerMenuCustomerResultMap">
+        select *
+        from customer
+        join vegas_rank
+        where customer.customer_rank =vegas_rank.vegas_rank_id
+    </select>
+    <update id="updateManagerMenuCustomerInfo" parameterType="hashmap">
+        update customer
+        <set>
+            <if test="attribute== 1">
+                customer_password=#{value}
+            </if>
+            <if test="attribute== 2">
+                customer_name=#{value}
+            </if>
+            <if test="attribute== 3">
+                customer_phone=#{value}
+            </if>
+        </set>
+        where customer_id=#{id}
+    </update>
+    <delete id="deleteMangerMenuCustomerInfo"  parameterType="hashmap" >
+        delete
+        from customer
+        where customer_id=#{id}
+    </delete>
+</mapper>

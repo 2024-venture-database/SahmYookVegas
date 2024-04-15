@@ -1,7 +1,7 @@
 insert into game(game_code, game_name, game_rate)
-values('r1','룰렛1.6배',1.6),
-		('r2','룰렛2배',2.0),
-		('s1','사다리',5.0);
+values('r1','미니룰렛',1.6),
+	('r2','익스트림룰렛',16.0),
+
 select * from game;
 
 insert into product(product_type, product_name, product_price, product_quantity)
@@ -19,13 +19,14 @@ values('n1','일반', 0.03),
 		('ma','관리자',0);
 select * from vegas_rank;
 
-insert into customer(customer_id, customer_password, customer_name,  customer_phone, customer_rank)
-values('aaa','aaa','호랑이', '1111111', 'n1'), 
-		('bbb','bbb','사자', '2222222','n1'),
-		('ccc','ccc','토끼', '33333333', 'n1'),
-		('ddd','ddd','악어', '4444444','v1'),
-        ('ggg','ggg','독수리', '5555555','v1'),
-        ('hhh','hhh', '코끼리','66666666', 'v2');
+insert into customer(customer_id, customer_password, customer_name,  customer_phone, customer_rank, customer_balance)
+values('aaa','aaa','호랑이', '1111111', 'n1',200000), 
+		('bbb','bbb','사자', '2222222','n1',350000),
+		('ccc','ccc','토끼', '33333333', 'n1',260000),
+		('ddd','ddd','악어', '4444444','v1',1000000),
+        ('ggg','ggg','독수리', '5555555','v1',1500000),
+        ('hhh','hhh', '코끼리','66666666', 'v2',15000000),
+	('admin','admin','카지노대통령',123456789,'ma',0);
 select * from customer;        
         
 insert into log(log_date, log_money, log_kind_money, log_activiy,  log_customer_id)
