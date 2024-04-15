@@ -17,7 +17,7 @@ public class ChipService {
     public Map<String, Object> chipExchangeReturn(Map<String, Integer> chipCounts) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("칩 교환/반환 서비스를 시작하겠습니다.");
+        System.out.println("칩 교환/반환 서비스를 시작하겠습니다.");
         System.out.println("사용자 ID를 입력하세요: ");
         String id = sc.nextLine();
 

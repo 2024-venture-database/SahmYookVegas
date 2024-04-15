@@ -11,7 +11,7 @@ public class Prototype {
         ChipService chipService = new ChipService();
         Scanner scanner = new Scanner(System.in);
 
-        chipService.setWalletAmount("sss", 100000000);
+//        chipService.setWalletAmount("sss", 100000000);
 
         System.out.println("======================Chip 서비스 시작======================");
 
