@@ -42,7 +42,8 @@
 #### ✔ 개발 환경
 ![java](https://img.shields.io/badge/java-FF9E0F?style=for-the-badge&logo=java&logoColor=white)
 ![mysql](https://img.shields.io/badge/mysql-83B81A?style=for-the-badge&logo=mysql&logoColor=white)
-![intellijIDEA](https://img.shields.io/badge/notion-8BC0D0?style=for-the-badge&logo=intellijIDEA&logoColor=white)
+![intellijIDEA](https://img.shields.io/badge/intellijIDEA-8BC0D0?style=for-the-badge&logo=intellijIDEA&logoColor=white)
+![myBatis](https://img.shields.io/badge/myBatis-FCBFBD?style=for-the-badge&logo=myBatis&logoColor=white)
 
 #### ✔ 협업 툴
 ![notion](https://img.shields.io/badge/notion-FCBFBD?style=for-the-badge&logo=notion&logoColor=white)
