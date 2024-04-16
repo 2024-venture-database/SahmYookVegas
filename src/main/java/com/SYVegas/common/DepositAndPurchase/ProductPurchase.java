@@ -10,16 +10,15 @@ import static com.SYVegas.common.Template.getSqlSession;
 public class ProductPurchase {
 
     private SYUVegasMapper mapper;
-
     // 지불 방식 선택
     public void productPaymentType(CurrentUser currentUser) {
         Scanner sc = new Scanner(System.in);
 
         String customerId = currentUser.getCurrentUserId();
 
-        System.out.println();
-        System.out.print(customerId+"이용객님");
 
+        System.out.println();
+        System.out.println(customerId+"이용객님");
 
 
         System.out.println("========\uD83E\uDE99\uD83E\uDE99\uD83E\uDE99========");
@@ -29,6 +28,7 @@ public class ProductPurchase {
 
         int payment = sc.nextInt();
         selectproductType(currentUser,payment, customerId);
+
     }
 
     // 구매할 상품 선택
@@ -38,6 +38,7 @@ public class ProductPurchase {
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
         List<ProductDTO> productList = mapper.getproductListByType();
         sqlSession.close();
+
 
         if (productList != null && productList.size() > 0) {
             System.out.println("");
@@ -114,7 +115,7 @@ public class ProductPurchase {
                 System.out.println("==================================================");
                 System.out.println(" \uD83D\uDCB0[지갑 잔액] : " + newBalance + "원");
                 System.out.println("==================================================");
-                saveLog(totalPrice, customerId);
+                saveLog(totalPrice, customerId,payment);
                 System.out.println(product.getName() + "를 구매완료했습니다.");
                 sqlSession.commit();
             }
@@ -145,7 +146,7 @@ public class ProductPurchase {
                 System.out.println("==================================================");
                 System.out.println(product.getName() + "를 구매완료했습니다.");
                 sqlSession.commit();
-                saveLog(totalPrice, customerId);
+                saveLog(totalPrice, customerId, payment);
             }
 
         } else {
@@ -156,14 +157,15 @@ public class ProductPurchase {
         sqlSession.close();
     }
 
-    public void saveLog(int totalPrice, String customerId) {
+    public void saveLog(int totalPrice, String customerId, int num) {
         SqlSession sqlSession = getSqlSession();
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("logDate", LocalDate.now());
         parameters.put("logMoney", totalPrice);
-        parameters.put("logKindMoney", "지갑");
+        if(num==1){parameters.put("logKindMoney", "지갑");}
+        if(num==2){parameters.put("logKindMoney", "크레딧");}
         parameters.put("logActiviy", "상품구매");
         parameters.put("logCustomerId", customerId);
 

@@ -26,6 +26,5 @@ public class ChipPrototype {
 
         chipService.updateChipDTO(currentUser,chipExchangeReturn);
 
-        System.out.println("프로그램을 종료합니다.");
     }
 }

@@ -1,6 +1,6 @@
 insert into game(game_code, game_name, game_rate)
 values('r1','미니룰렛',1.6),
-	('r2','익스트림룰렛',16.0),
+	('r2','익스트림룰렛',16.0);
 
 select * from game;
 
@@ -31,8 +31,8 @@ select * from customer;
         
 insert into log(log_date, log_money, log_kind_money, log_activiy,  log_customer_id)
 values(curdate(),5000000,'지갑','충전','hhh'),
-		(curdate(),-200000,'지갑','칩교환','aaa'),
-        (curdate(),-200000,'지갑','칩교환','hhh'),
-        (curdate(),300000,'지갑','칩반환','hhh'),
+		(curdate(),200000,'지갑','칩 교환','aaa'),
+        (curdate(),-200000,'지갑','칩 교환','hhh'),
+        (curdate(),300000,'지갑','칩 반환','hhh'),
         (curdate(),-2000,'크레딧','상품구매','bbb');
 select * from log;

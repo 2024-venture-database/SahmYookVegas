@@ -20,7 +20,7 @@ public class DepositManager {
         mapper = sqlSession.getMapper(SYUVegasMapper.class);
 
         String customerId = currentUser.getCurrentUserId();
-
+        int num =0;
         int depositAmount;
         do{
             System.out.println();
@@ -59,6 +59,7 @@ public class DepositManager {
         System.out.println(" \uD83D\uDCB0[크레딧 잔액] : " + newCreditBalance + "원");
         System.out.println("============================================");
 
+
         saveLog(depositAmount, customerId);
         sqlSession.commit();
         sqlSession.close();
@@ -71,7 +72,6 @@ public class DepositManager {
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("logDate", LocalDate.now());
         parameters.put("logMoney", depositAmount);
-        parameters.put("logKindMoney", "지갑");
         parameters.put("logActiviy", "상품구매");
         parameters.put("logCustomerId", customerId);
 

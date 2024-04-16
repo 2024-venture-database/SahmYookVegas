@@ -27,5 +27,6 @@
     <select id="sumAllMangerMenuLog" resultType="java.lang.Integer" >
         SELECT SUM(log_money) AS sum_result
         from log
+        where log_activiy in ('충전', '칩 교환', '칩 반환')
     </select>
 </mapper>

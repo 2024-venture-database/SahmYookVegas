@@ -65,15 +65,26 @@ public class ChipService {
 
         if (chipCounts == null) {
             chipCounts = new HashMap<>();
+            int[] chipInput = new int[5];
             System.out.println("======================");
-            System.out.println("1칩, 5칩, 10칩, 50칩, 100칩 각각 몇 개씩 교환/반환하시겠습니까? (공백으로 구분하여 입력)");
-            String[] chipInput = sc.nextLine().split(" ");
+            System.out.println("1칩, 5칩, 10칩, 50칩, 100칩 각각 몇 개씩 교환/반환하시겠습니까?");
+            System.out.print("[칩1]: ");
+            chipInput[0] = sc.nextInt();
+            System.out.print("[칩5]: ");
+            chipInput[1] = sc.nextInt();
+            System.out.print("[칩10]: ");
+            chipInput[2] = sc.nextInt();
+            System.out.print("[칩50]: ");
+            chipInput[3] = sc.nextInt();
+            System.out.print("[칩100]: ");
+            chipInput[4] = sc.nextInt();
 
-            chipCounts.put("1칩", Integer.parseInt(chipInput[0]));
-            chipCounts.put("5칩", Integer.parseInt(chipInput[1]));
-            chipCounts.put("10칩", Integer.parseInt(chipInput[2]));
-            chipCounts.put("50칩", Integer.parseInt(chipInput[3]));
-            chipCounts.put("100칩", Integer.parseInt(chipInput[4]));
+
+            chipCounts.put("1칩", chipInput[0]);
+            chipCounts.put("5칩", chipInput[1]);
+            chipCounts.put("10칩",chipInput[2]);
+            chipCounts.put("50칩", chipInput[3]);
+            chipCounts.put("100칩",chipInput[4]);
 
         }
 
@@ -212,7 +223,7 @@ public class ChipService {
 
         Map<String, Object> parameters = new HashMap<>();
         parameters.put("logDate", LocalDate.now());
-        parameters.put("logMoney", totalPrice);
+        parameters.put("logMoney", -totalPrice);
         parameters.put("logKindMoney", "지갑");
         parameters.put("logActiviy", "칩교환");
         parameters.put("logCustomerId", customerId);
