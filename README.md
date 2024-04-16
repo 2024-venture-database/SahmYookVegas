@@ -36,8 +36,9 @@
 - 관리자는 고객의 정보를 조회하고 관리하는 관리자 서비스 기능을 이용할 수 있습니다.  
 ***
 ## 🔎 개발 과정
-#### ✔ 작동 환경
-<img src="https://img.shields.io/badge/windows10-000000?style=for-the-badge&logo=windows10&logoColor=white">
+#### ✔ 환경설정
+- JDK 17
+- Gradle project
 
 #### ✔ 개발 환경
 ![java](https://img.shields.io/badge/java-FF9E0F?style=for-the-badge&logo=java&logoColor=white)
