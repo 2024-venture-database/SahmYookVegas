@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.SYVegas.common.DepositAndPurchase.SYUVegasMapper">
+
+    <resultMap id="productResultMap" type="com.SYVegas.common.DepositAndPurchase.ProductDTO">
+        <id property="code" column="product_code"/>
+        <result property="type" column="product_type"/>
+        <result property="name" column="product_name"/>
+        <result property="price" column="product_price"/>
+        <result property="quantity" column="product_quantity"/>
+    </resultMap>
+
+    <resultMap id="customerResultMap" type="com.SYVegas.common.DepositAndPurchase.DepositDTO">
+        <id property="id" column="customer_id"/>
+        <result property="name" column="customer_name"/>
+        <result property="balance" column="customer_balance"/>
+        <result property="credit" column="customer_credit"/>
+        <result property="rank" column="customer_rank"/>
+    </resultMap>
+
+    <!-- 상품 구매 -->
+    <select id="getproductListByType" parameterType="string" resultMap="productResultMap">
+        SELECT product_type, product_name, product_price, product_quantity
+        FROM product
+    </select>
+
+    <update id="updateCustomerBalance" parameterType="hashmap">
+        UPDATE customer
+        SET customer_balance = customer_balance + #{totalPrice}
+        WHERE customer_id = #{customerId}
+    </update>
+
+    <update id="updateCreditBalance" parameterType="hashmap">
+        UPDATE customer
+        SET customer_credit = customer_credit + #{totalPrice}
+        WHERE customer_id = #{customerId}
+    </update>
+
+    <!-- 돈 충전 -->
+
+    <select id="getCustomerBalance" resultType="int" parameterType="String">
+        SELECT customer_balance
+        FROM customer
+        WHERE customer_id = #{customerId}
+    </select>
+
+    <select id="getCustomerCredit" resultType="int" parameterType="String">
+        SELECT customer_credit
+        FROM customer
+        WHERE customer_id = #{customerId}
+    </select>
+
+    <update id="updateCustomerWallet" parameterType="hashmap">
+        UPDATE customer
+        SET customer_balance = customer_balance + #{depositAmount},
+            customer_credit = customer_credit + #{newCreditBalance}
+        WHERE customer_id = #{customerId}
+    </update>
+
+    <select id="getCustomerRankByRank" resultMap="customerResultMap">
+        SELECT customer_rank
+        FROM customer
+        WHERE customer_rank
+    </select>
+
+    <select id="getCustomerCreditRate" resultType="float" parameterType="String">
+        SELECT vegas_credit_rate
+        FROM vegas_rank vr
+        JOIN customer c ON vr.vegas_rank_id = c.customer_rank
+        WHERE c.customer_id = #{customerId}
+    </select>
+
+    <insert id="insertMoneyExchangeLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy, log_customer_id)
+        VALUES (curdate(), #{logMoney}, '지갑', '충전', #{logCustomerId})
+    </insert>
+
+    <insert id="insertPurchaseLog" parameterType="map">
+        INSERT INTO log (log_date, log_money, log_kind_money, log_activiy, log_customer_id)
+        VALUES (curdate(), #{logMoney}, '지갑', '상품 구매', #{logCustomerId})
+    </insert>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.SYVegas.member.CustomerMapper">
+    <!-- 회원 가입을 위한 INSERT 쿼리 -->
+    <insert id="insertCustomer" parameterType="com.SYVegas.member.Customer">
+        INSERT INTO customer (customer_id, customer_password, customer_name, customer_phone)
+        VALUES (#{customerId}, #{customerPw}, #{customerName}, #{customerPhone})
+    </insert>
+
+    <!-- 아이디와 비밀번호로 사용자 조회를 위한 SELECT 쿼리 -->
+    <select id="getCustomerByIdAndPassword" parameterType="java.util.Map" resultType="com.SYVegas.member.Customer">
+        SELECT *, customer_rank as customerRank FROM customer
+        WHERE customer_id = #{customerId} AND customer_password = #{customerPw}
+    </select>
+
+    <!-- 회원 가입 시 아이디 중복 방지를 위한 SELECT 쿼리 -->
+    <select id="getCustomerById" parameterType="java.lang.String" resultType="com.SYVegas.member.Customer">
+        SELECT *
+        FROM customer
+        WHERE customer_id = #{customerId}
+    </select>
+
+</mapper>
